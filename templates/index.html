@@ -1,0 +1,58 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gatorloop</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/static?resource=lib/bootstrap-theme-white-plum/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static?resource=lib/animate.css/animate.css" />
+    <link rel="stylesheet" href="/static?resource=styles/main.css">
+    <link rel="stylesheet" href="/static?resource=styles/bubbles.css">
+    <!-- <script type="text/javascript" src="//cdn.socket.io/socket.io-1.1.0.js" integrity="ni:///sha-256;4omls-f3OZnoi9yQzyNT9_vPSo8hb-oTnjdwgyUcJV8=?ct=application/javascript"></script> -->
+  </head>
+  <body ng-app="gatorloopWebApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ng-controller="dashboardCTRL">
+        <span class="btn btn-xs btn-default" ng-click="sendStopSignal()">stop</span>
+        <span class="btn btn-xs btn-default" ng-click="getCurrentVelocity()">get velocity</span>
+        <span class="btn btn-xs btn-default" ng-click="getCurrentPressure()">get pressure</span>
+        <span class="btn btn-xs btn-default" ng-click="getCurrentPosition()">get position</span>
+        <span class="btn btn-xs btn-default" ng-click="getCurrentAcceleration()">get acceleration</span>
+        <span class="btn btn-xs btn-default" ng-click="getCurrentTemperature()">get temperature</span>
+        <form>
+            <span class="btn btn-xs btn-default" ng-click="saveCurrentVelocity()">Save Velocity</span>
+            <input ng-model="newVelocity" />
+        </form>
+    </div>
+
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/static?resource=lib/angular/angular.js"></script>
+    <script src="/static?resource=lib/angular-animate/angular-animate.min.js"></script>
+    <script src="/static?resource=lib/angular-socket-io/socket.js"></script>
+    <script src="/static?resource=lib/moment/min/moment.min.js"></script>
+    <script src="/static?resource=lib/angular-moment/angular-moment.min.js"></script>
+    <script src="/static?resource=lib/angularjs-scroll-glue/src/scrollglue.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="/static?resource=scripts/app.js"></script>
+        <script src="/static?resource=scripts/controllers/dashboard.js"></script>
+        <script src="/static?resource=scripts/services/dashboardService.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
