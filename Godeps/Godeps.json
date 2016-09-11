@@ -29,11 +29,6 @@
 			"Rev": "3654d25ec346ee8ce71a68431025458d52a38ac0"
 		},
 		{
-			"ImportPath": "github.com/op/go-logging",
-			"Comment": "v1-7-g970db52",
-			"Rev": "970db520ece77730c7e4724c61121037378659d9"
-		},
-		{
 			"ImportPath": "golang.org/x/sys/unix",
 			"Rev": "a646d33e2ee3172a661fc09bca23bb4889a41bc8"
 		}

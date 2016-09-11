@@ -4,14 +4,10 @@ angular.module('gatorloopWebApp')
     var api = "/api/";
     return {
         sendStopSignal: function() {
-            return $http.get(api + "sendStopSignal");
+            return $http.get(api + "stop");
         },
-        getData: function(url) {
+        get: function(url) {
             return $http.get(api + url);
-        },
-        postData: function(url, data) {
-            console.log("Posting data: " + data + " to url " + url);
-            return $http.post(api + url, data);
         }
     }
 })

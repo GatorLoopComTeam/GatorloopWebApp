@@ -13,6 +13,7 @@ import (
 func main() {
 	wsContainer := restful.NewContainer()
 	wsContainer.Router(restful.CurlyRouter{})
+	server.RegisterFileServer("/", wsContainer)
 	server.RegisterAPI("/api", wsContainer)
 	database.InitDB()
 
