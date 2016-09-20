@@ -1,11 +1,9 @@
 package server
 
 import (
-	"html/template"
 	"net/http"
 	"path"
 
-	log "github.com/Sirupsen/logrus"
 	restful "github.com/emicklei/go-restful"
 	"github.com/emicklei/go-restful/swagger"
 	"github.com/gatorloopwebapp/api"
@@ -23,9 +21,6 @@ func RegisterFileServer(path string, container *restful.Container) {
 	ws.Route(ws.GET("/static").To(staticFromQueryParam).
 		Doc("Serves static files").
 		Param(ws.PathParameter("resource", "the path to a resource within /static")))
-
-	ws.Route(ws.GET("").To(home).
-		Doc("Serves index.html"))
 
 	restful.Add(ws)
 }
@@ -93,14 +88,4 @@ func staticFromQueryParam(req *restful.Request, resp *restful.Response) {
 		resp.ResponseWriter,
 		req.Request,
 		path.Join("./static", req.QueryParameter("resource")))
-}
-
-// handler to serve index.html on /
-func home(req *restful.Request, resp *restful.Response) {
-	// you might want to cache compiled templates
-	t, err := template.ParseFiles("./templates/index.html")
-	if err != nil {
-		log.Errorf("Template gave: %s", err)
-	}
-	t.Execute(resp.ResponseWriter, t)
 }

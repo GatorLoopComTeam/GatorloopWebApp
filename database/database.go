@@ -8,7 +8,7 @@ import (
 
 const (
 	// DBConnectionString : mysql db connection string
-	DBConnectionString = "pi1:gavin@/gatorloop?charset=utf8"
+	DBConnectionString = "root:@/gatorloop?charset=utf8"
 )
 
 // DB : accessible mysql database variable
