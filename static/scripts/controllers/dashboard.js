@@ -99,6 +99,6 @@ angular.module('gatorloopWebApp')
         $scope.getCurrentPressure();
         $scope.getCurrentTemperature();
         $scope.getCurrentPosition();
-      }, 1000);
+      }, 500);
 
     });
