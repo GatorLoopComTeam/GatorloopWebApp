@@ -7,7 +7,6 @@ import (
 	log "github.com/Sirupsen/logrus"
 	restful "github.com/emicklei/go-restful"
 	"github.com/gatorloopwebapp/database"
-	"github.com/gatorloopwebapp/server/constants"
 )
 
 // Velocity : struct to hold velocity values
@@ -15,15 +14,19 @@ type Velocity struct {
 	Velocity float64 `json:"velocity"`
 }
 
-// GetRecent : gets the average of 5 most recent velocities
+// GetRecent : gets the most recent velocity
 func (v Velocity) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT AVG(tmp.Velocity) FROM (SELECT velocity FROM gatorloop.Velocity ORDER BY idVelocity DESC LIMIT " + constants.NumEntriesToAvg + ") as tmp;")
+	row := database.DB.QueryRow("SELECT velocity FROM gatorloop.Velocity ORDER BY idVelocity DESC LIMIT 1")
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
-		log.Errorf("Row scan failed. %v", err)
-		response.WriteError(http.StatusInternalServerError, err)
-		return
+		if err == sql.ErrNoRows {
+			log.Errorf("No Rows found. Returning 0.")
+		} else {
+			log.Errorf("Row scan failed. %v", err)
+			response.WriteError(http.StatusInternalServerError, err)
+			return
+		}
 	}
 	var ret Velocity
 	if res.Valid {

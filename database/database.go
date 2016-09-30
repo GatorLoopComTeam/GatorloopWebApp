@@ -4,11 +4,7 @@ import (
 	"database/sql"
 
 	log "github.com/Sirupsen/logrus"
-)
-
-const (
-	// DBConnectionString : mysql db connection string
-	DBConnectionString = "root:@/gatorloop?charset=utf8"
+	"github.com/gatorloopwebapp/server/constants"
 )
 
 // DB : accessible mysql database variable
@@ -22,7 +18,7 @@ func InitDB() {
 	}
 	// connect to maria db
 	var err error
-	DB, err = sql.Open("mysql", DBConnectionString)
+	DB, err = sql.Open("mysql", constants.DBConnectionString)
 	if err != nil {
 		log.Fatalf("Error opening database. %v", err)
 	}

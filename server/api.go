@@ -7,7 +7,6 @@ import (
 	restful "github.com/emicklei/go-restful"
 	"github.com/emicklei/go-restful/swagger"
 	"github.com/gatorloopwebapp/api"
-	"github.com/gatorloopwebapp/server/constants"
 )
 
 // RegisterFileServer : registers file serving routes with go-restful
@@ -21,6 +20,10 @@ func RegisterFileServer(path string, container *restful.Container) {
 	ws.Route(ws.GET("/static").To(staticFromQueryParam).
 		Doc("Serves static files").
 		Param(ws.PathParameter("resource", "the path to a resource within /static")))
+
+	ws.Route(ws.GET("/node_modules").To(staticNMFromQueryParam).
+		Doc("Serves static node_modules files").
+		Param(ws.PathParameter("resource", "the path to a resource within /node_modules")))
 
 	restful.Add(ws)
 }
@@ -37,32 +40,37 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 	var v api.Velocity
 	ws.Route(ws.GET("/velocity").
 		To(v.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " velocities."))
+		Doc("Get the most recent velocity."))
 
 	var a api.Acceleration
 	ws.Route(ws.GET("/acceleration").
 		To(a.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " accelerations."))
+		Doc("Get the most recent acceleration."))
 
 	var p api.Position
 	ws.Route(ws.GET("/position").
 		To(p.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " positions."))
+		Doc("Get the most recent position."))
 
 	var r api.Rotations
 	ws.Route(ws.GET("/rotation").
 		To(r.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " rotations."))
+		Doc("Get the most recent rotation."))
 
 	var t api.Temperature
 	ws.Route(ws.GET("/temperature").
 		To(t.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " temperatures."))
+		Doc("Get the most recent temperature."))
 
-	var pr api.Pressure
-	ws.Route(ws.GET("/pressure").
-		To(pr.GetRecent).
-		Doc("Get an average of the last " + constants.NumEntriesToAvg + " pressures."))
+	var pBat api.PrimaryBattery
+	ws.Route(ws.GET("/primarybattery").
+		To(pBat.GetRecent).
+		Doc("Get the most recent primary battery values"))
+
+	var aBat api.AuxiliaryBattery
+	ws.Route(ws.GET("/auxbattery").
+		To(aBat.GetRecent).
+		Doc("Get the most recent auxiliary battery values"))
 
 	var s api.Stop
 	ws.Route(ws.GET("/stop").
@@ -88,4 +96,12 @@ func staticFromQueryParam(req *restful.Request, resp *restful.Response) {
 		resp.ResponseWriter,
 		req.Request,
 		path.Join("./static", req.QueryParameter("resource")))
+}
+
+// handler to serve static node_modules files
+func staticNMFromQueryParam(req *restful.Request, resp *restful.Response) {
+	http.ServeFile(
+		resp.ResponseWriter,
+		req.Request,
+		path.Join("./node_modules", req.QueryParameter("resource")))
 }

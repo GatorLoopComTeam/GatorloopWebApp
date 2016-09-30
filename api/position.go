@@ -12,24 +12,29 @@ import (
 
 // Position : struct to hold position values
 type Position struct {
-	Position float64 `json:"position"`
+	Position           float64 `json:"position"`
+	PositionPercentage float64 `json:"position_percentage"`
 }
 
-// GetRecent : gets the average of most recent positions
+// GetRecent : gets the most recent position
 func (p Position) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT AVG(tmp.Position) FROM (SELECT position FROM gatorloop.Position ORDER BY idPosition DESC LIMIT " + constants.NumEntriesToAvg + ") as tmp;")
+	row := database.DB.QueryRow("SELECT position FROM gatorloop.Position ORDER BY idPosition DESC LIMIT 1")
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
-		log.Errorf("Row scan failed. %v", err)
-		response.WriteError(http.StatusInternalServerError, err)
-		return
+		if err == sql.ErrNoRows {
+			log.Errorf("No Rows found. Returning 0.")
+		} else {
+			log.Errorf("Row scan failed. %v", err)
+			response.WriteError(http.StatusInternalServerError, err)
+			return
+		}
 	}
 	var ret Position
 	if res.Valid {
-		ret = Position{res.Float64}
+		ret = Position{res.Float64, res.Float64 / constants.TotalPodDistance}
 	} else {
-		ret = Position{0}
+		ret = Position{0, 0}
 	}
 	response.WriteEntity(ret)
 }
