@@ -7,7 +7,6 @@ import (
 	log "github.com/Sirupsen/logrus"
 	restful "github.com/emicklei/go-restful"
 	"github.com/gatorloopwebapp/database"
-	"github.com/gatorloopwebapp/server/constants"
 )
 
 // Rotations : struct to hold rotation values
@@ -17,15 +16,19 @@ type Rotations struct {
 	Yaw   float64 `json:"yaw"`
 }
 
-// GetRecent : gets the average of most recent rotations
+// GetRecent : gets the most recent rotation
 func (r Rotations) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT AVG(tmp.Roll), AVG(tmp.Pitch), AVG(tmp.Yaw) FROM (SELECT Roll, Pitch, Yaw FROM gatorloop.Rotation ORDER BY idRotation DESC LIMIT " + constants.NumEntriesToAvg + ") as tmp;")
+	row := database.DB.QueryRow("SELECT roll, pitch, yaw FROM gatorloop.Rotation ORDER BY idRotation DESC LIMIT 1")
 	var roll, pitch, yaw sql.NullFloat64
 	err := row.Scan(&roll, &pitch, &yaw)
 	if err != nil {
-		log.Errorf("Row scan failed. %v", err)
-		response.WriteError(http.StatusInternalServerError, err)
-		return
+		if err == sql.ErrNoRows {
+			log.Errorf("No Rows found. Returning 0.")
+		} else {
+			log.Errorf("Row scan failed. %v", err)
+			response.WriteError(http.StatusInternalServerError, err)
+			return
+		}
 	}
 	var ret Rotations
 	if roll.Valid && pitch.Valid && yaw.Valid {

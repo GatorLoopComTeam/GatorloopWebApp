@@ -9,121 +9,23 @@
     <title>Gatorloop</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/static?resource=lib/bootstrap-theme-white-plum/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/static?resource=lib/animate.css/animate.css" />
     <link rel="stylesheet" href="/static?resource=styles/main.css">
-    <link rel="stylesheet" href="/static?resource=styles/bubbles.css">
-    <!-- <script type="text/javascript" src="//cdn.socket.io/socket.io-1.1.0.js" integrity="ni:///sha-256;4omls-f3OZnoi9yQzyNT9_vPSo8hb-oTnjdwgyUcJV8=?ct=application/javascript"></script> -->
   </head>
-  <body ng-app="gatorloopWebApp">
+  <body ng-app="gatorloopWebApp" id="body">
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <div ng-controller="dashboardCTRL">
-      <table>
-        <thead>
-          <th style="text-align:center; padding: 20px;">Current Velocity <h4>{{currentVelocity}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Acceleration <h4>{{currentAcceleration}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Position <h4>{{currentPosition}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Pressure <h4>{{currentPressure}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Temperature <h4>{{currentTemperature}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Rotations <h4>{{currentRotation}}</h4></th>
-
-        </thead>
-        <tbody style="text-align:center;">
-          <tr>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="v in velocities track by $index">
-                  <td>{{v}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="a in accelerations track by $index">
-                  <td>{{a}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in positions track by $index">
-                  <td>{{p}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in pressures track by $index">
-                  <td>{{p}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="t in temperatures track by $index">
-                  <td>{{t}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="r in rotations track by $index">
-                  <td>{{r.r}}, {{r.p}}, {{r.y}}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-        <!-- <div>
-          <label>Current Velocity: </label><span style="margin-left:5px;">{{currentVelocity}}</span>
-          <p ng-if="showAllData">{{velocities}}</p>
-        </div>
-        <div>
-          <label>Current Acceleration: </label><span style="margin-left:5px;">{{currentAcceleration}}</span>
-          <p ng-if="showAllData">{{acclerations}}</p>
-        </div>
-        <div>
-          <label>Current Position: </label><span style="margin-left:5px">{{currentPosition}}</span>
-          <p ng-if="showAllData">{{positions}}</p>
-        </div>
-        <div>
-          <label>Current Pressue: </label><span style="margin-left:5px">{{currentPressure}}</span>
-          <p ng-if="showAllData">{{pressures}}</p>
-        </div>
-        <div>
-          <label>Current Temperature: </label><span style="margin-left:5px">{{currentTemperature}}</span>
-          <p ng-if="showAllData">{{temperatures}}</p>
-        </div>
-        <div>
-          <label>Current Rotation: </label><span style="margin-left:5px">Roll: {{currentRotation.Roll}}, Pitch: {{currentRotation.Pitch}}, Yaw: {{currentRotation.Yaw}}</span>
-          <p ng-if="showAllData">{{rotations}}</p>
-        </div> -->
+			<button ng-click="startGettingData()">Start</button>
+			<button ng-click="stopGettingData()">Stop</button>
     </div>
-
-
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="/static?resource=lib/angular/angular.js"></script>
-    <script src="/static?resource=lib/angular-animate/angular-animate.min.js"></script>
-    <script src="/static?resource=lib/angular-socket-io/socket.js"></script>
-    <script src="/static?resource=lib/moment/min/moment.min.js"></script>
-    <script src="/static?resource=lib/angular-moment/angular-moment.min.js"></script>
-    <script src="/static?resource=lib/angularjs-scroll-glue/src/scrollglue.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="/static?resource=scripts/app.js"></script>
-        <script src="/static?resource=scripts/controllers/dashboard.js"></script>
-        <script src="/static?resource=scripts/services/dashboardService.js"></script>
-        <!-- endbuild -->
 </body>
+
+
+<script src="/node_modules?resource=/angular/angular.js"></script>
+<script src="/static?resource=scripts/app.js"></script>
+<script src="/static?resource=scripts/controllers/dashboard.js"></script>
+<script src="/static?resource=scripts/services/dashboardService.js"></script>
 </html>

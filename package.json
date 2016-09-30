@@ -1,0 +1,24 @@
+{
+  "name": "gatorloopwebapp",
+  "version": "1.0.0",
+  "description": "### Pre-installation Before you can run the project, you will need to have golang installed and configured (https://golang.org/doc/code.html). You will also need to install mysql, and create a running instance of the gatorloop database on localhost:3306.",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "chart.js": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GatorLoopComTeam/GatorloopWebApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GatorLoopComTeam/GatorloopWebApp/issues"
+  },
+  "homepage": "https://github.com/GatorLoopComTeam/GatorloopWebApp#readme"
+}

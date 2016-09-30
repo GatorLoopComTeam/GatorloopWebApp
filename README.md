@@ -1,7 +1,7 @@
 # Gatorloop Webapp
 
 ### Pre-installation
-Before you can run the project, you will need to have golang installed and configured (https://golang.org/doc/code.html). You will also need to install mysql, and create a running instance of the gatorloop database on localhost:3306.
+Before you can run the project, you will need to have golang installed and configured (https://golang.org/doc/code.html). You will also need to install mysql, and create a running instance of the gatorloop database on localhost:3306. The GatorloopSchema.sql file will create the schema and all of its tables.
 
 ### Installation Instructions
 1. Clone the project into $GOPATH/src/github.com
