@@ -1,0 +1,10 @@
+package: github.com/gatorloopwebapp
+import:
+- package: github.com/Sirupsen/logrus
+  version: ~0.10.0
+- package: github.com/emicklei/go-restful
+  version: ~1.2.0
+  subpackages:
+  - swagger
+- package: github.com/go-sql-driver/mysql
+  version: ~1.2.0
