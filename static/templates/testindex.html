@@ -9,87 +9,133 @@
     <title>Gatorloop</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/node_modules?resource=bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static?resource=styles/main.css">
     <!-- <script type="text/javascript" src="//cdn.socket.io/socket.io-1.1.0.js" integrity="ni:///sha-256;4omls-f3OZnoi9yQzyNT9_vPSo8hb-oTnjdwgyUcJV8=?ct=application/javascript"></script> -->
   </head>
-  <body ng-app="gatorloopWebApp">
+  <body ng-app="gatorloopWebApp" id="body" class="col-md-12 jumbotron">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <div ng-controller="dashboardCTRL">
-      <button ng-click="startGettingData()">start</button>
-      <button ng-click="stopGettingData()">stop</button>
-      <table>
-        <thead>
-          <th style="text-align:center; padding: 20px;">Current Velocity <h4>{{currentVelocity}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Acceleration <h4>{{currentAcceleration}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Position <h4>{{currentPosition}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Temperature <h4>{{currentTemperature}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Primary Battery <h4>{{currentPrimaryBattery}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Aux Battery <h4>{{currentAuxiliaryBattery}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Rotations <h4>{{currentRotation}}</h4></th>
-
-        </thead>
-        <tbody style="text-align:center;">
-          <tr>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="v in velocities track by $index">
-                  <td>{{v}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="a in accelerations track by $index">
-                  <td>{{a}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in positions track by $index">
-                  <td>{{p}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="t in temperatures track by $index">
-                  <td>{{t}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in primaryBatterys track by $index">
-                  <td>{{p.voltage}}, {{p.soc}}, {{p.temperature}}, {{p.amp_hours}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="a in auxiliaryBatterys track by $index">
-                  <td>{{a.voltage}}, {{a.soc}}, {{a.temperature}}, {{a.amp_hours}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="r in rotations track by $index">
-                  <td>{{r.r}}, {{r.p}}, {{r.y}}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="background_0" class="col-md-12">
     </div>
 
+    <div id="background_1" class="col-md-12">
+      <img id="progressive_bar" src="static?resource=images/progressivebar.png" class="col-md-9" alt="Responsive image"/>
+      <img src="static?resource=images/stopbutton.png" id="button1" class="img-fluid" alt="Responsive image"/>
+    </div>
+
+    <div id="background_2" class="col-md-12">
+      <div id="background_2A" class="col-md-5">
+        <div id="background_2A1" class= "col-md-12"><!--graph goes here--></div>
+        <div id="background_2A2"class= "col-md-6"><!--velocity goes here--></div>
+        <div id="background_2A3"class= "col-md-6"><!--acceleration goes here--></div>
+      </div>
+      <div id="background_2B" class="col-md-5">
+        <div id="background_2B1" class= "col-md-12"><!--pod pic goes here-->
+          <div id="background_2B1_axis" class= "col-md-12"><!--pod pic goes here-->
+          <img id="img_control_pod" src="static?resource=images/podmodel.png"/>
+          </div>
+        </div>
+        <div id="background_2B2" class= "col-md-4"><!--pitch goes here--></div>
+        <div id="background_2B3" class= "col-md-4"><!--roll goes here--></div>
+        <div id="background_2B4" class= "col-md-4"><!--yaw goes here--></div>
+      </div>
+      <div id="background_2C" class="col-md-2">
+        <div id="background_2C1" class= "col-md-12"><!--temp goes here-->
+          <img id="img_control_temp" class="col-md-6" src="static?resource=images/temperatureicon.png" />
+        </div>
+        <div id="background_2C2" class= "col-md-12"><!--temp goes here-->
+          <div id="background_2C2A" class= "col-md-12"><!--primary bat goes here--></div>
+          <div id="background_2C2B" class= "col-md-12"><!--auxilary bat goes here--></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="background_3" class="col-md-12">
+      <div id="background_3A" class= "col-md-4"><!--Distance Traveled goes here--></div>
+      <div id="background_3B" class= "col-md-3"><!--Distance Left goes here--></div>
+      <div id="background_3C" class= "col-md-2 col-md-offset-9"><!--GATORLOOP logo goes here--></div>
+      <div id="background_3D" class= "col-md-1"><!--UFLOGO goes here--></div>
+    </div>
+
+
+
+
+    <!--div class="container col-md-offset-1">
+      <div ng-controller="dashboardCTRL">
+        <button ng-click="startGettingData()">start</button>
+        <button ng-click="stopGettingData()">stop</button>
+        <table>
+          <thead>
+            <th style="text-align:center; padding: 20px;">Current Velocity <h4>{{currentVelocity}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Acceleration <h4>{{currentAcceleration}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Position <h4>{{currentPosition}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Temperature <h4>{{currentTemperature}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Primary Battery <h4>{{currentPrimaryBattery}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Aux Battery <h4>{{currentAuxiliaryBattery}}</h4></th>
+            <th style="text-align:center; padding: 20px;">Current Rotations <h4>{{currentRotation}}</h4></th>
+
+          </thead>
+          <tbody style="text-align:center;">
+            <tr>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="v in velocities track by $index">
+                    <td>{{v}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="a in accelerations track by $index">
+                    <td>{{a}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="p in positions track by $index">
+                    <td>{{p}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="t in temperatures track by $index">
+                    <td>{{t}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="p in primaryBatterys track by $index">
+                    <td>{{p.voltage}}, {{p.soc}}, {{p.temperature}}, {{p.amp_hours}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="a in auxiliaryBatterys track by $index">
+                    <td>{{a.voltage}}, {{a.soc}}, {{a.temperature}}, {{a.amp_hours}}</td>
+                  </tr>
+                </table>
+              </td>
+              <td style="border-left: solid 1px black;">
+                <table>
+                  <tr ng-repeat="r in rotations track by $index">
+                    <td>{{r.r}}, {{r.p}}, {{r.y}}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <script src="/node_modules?resource=angular/angular.js"></script>
     <script src="/static?resource=scripts/app.js"></script>
     <script src="/static?resource=scripts/controllers/dashboard.js"></script>
-    <script src="/static?resource=scripts/services/dashboardService.js"></script>
+    <script src="/static?resource=scripts/services/dashboardService.js"></script-->
 </body>
 </html>

@@ -86,7 +86,7 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 
 		// Optionally, specifiy where the UI is located
 		SwaggerPath:     "/apidocs/",
-		SwaggerFilePath: "/Users/gavin/gocode/src/github.com/gatorloopwebapp/swagger-ui/dist"}
+		SwaggerFilePath: "/home/elan/gocode/src/github.com/gatorloopwebapp/swagger-ui/dist"}
 	swagger.RegisterSwaggerService(config, restful.DefaultContainer)
 }
 
