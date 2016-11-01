@@ -2,6 +2,7 @@
 
 angular.module('gatorloopWebApp')
     .controller('dashboardCTRL', function($scope, dashboardService, $timeout) {
+      $scope.isStreaming = false;
       $scope.currentVelocity = {x: 0, y: 0};
       $scope.velocities = [];
       $scope.currentTemperature = 0;
@@ -108,6 +109,7 @@ angular.module('gatorloopWebApp')
 
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
+                $scope.isStreaming = true;
                 $scope.getCurrentVelocity();
                 $scope.getCurrentAcceleration();
                 $scope.getCurrentRotations();
@@ -119,7 +121,8 @@ angular.module('gatorloopWebApp')
       }
 
       $scope.stopGettingData = function() {
-        clearInterval($scope.interval);
+          $scope.isStreaming = false;
+          clearInterval($scope.interval);
       }
 
       $scope.setPrimaryBatteryLevel = function(percent) {
