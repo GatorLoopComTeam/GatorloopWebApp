@@ -1,11 +1,46 @@
 
+.jumbotron {
+    background: url(static?resource=images/background-03.png) no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover; /*  Safari  */
+    -khtml-background-size: cover; /*  Konqueror  */
+    -o-background-size: cover;
+    -moz-background-size: cover; /*  Firefox  */
+}
+
 #body {
+    font-family: "Helvetica Neue", Helvetica, Monsterrat-Regular, sans-serif;
     height: 100vh;
     width: 100%;
 }
 
+.grow_to_container {
+    position: relative;
+    left: 10%;
+    top: 20%;
+    height: 70%;
+    max-width: 40%;
+    padding: 0;
+}
+
 #progressive_bar {
     max-width: 80%;
+}
+
+#button1 {
+    max-width: 10%;
+    max-height: 50px;
+    position: relative;
+    padding-left: 5px;
+    bottom: 15px;
+}
+
+#button2 {
+    max-width: 10%;
+    max-height: 50px;
+    position: relative;
+    padding-left: 5px;
+    bottom: 15px;
 }
 
 #img_control_temp{
@@ -16,6 +51,133 @@
     top: 20%;
 }
 
+#img_control_F{
+    background: url(static?resource=images/F.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    //background-color: yellow;
+    background-size: 100% 30%;
+    -webkit-background-size: 100% 30%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 30%;/*  Konqueror  */
+    -o-background-size: 100% 30%;
+    -moz-background-size: 100% 30%;/*  Firefox  */
+}
+
+.img_control_battery{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 20% 70%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    padding: 0;
+    //background-color: red;
+    background-size: 70% 80%;
+    -webkit-background-size: 70% 80%;/*  Safari/Chrome  */
+    -khtml-background-size: 70% 80%;/*  Konqueror  */
+    -o-background-size: 70% 80%;
+    -moz-background-size: 70% 80%;/*  Firefox  */
+}
+
+.battery_input {
+    font-family: Monsterrat-Regular;
+    font-size: large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    right: 160%;
+    bottom: 20%;
+    //background-color: aqua;
+    height: 100%;
+    max-width: 100%;
+
+}
+
+#align {
+    position: relative;
+    right: 75%;
+}
+
+#align2 {
+    position: relative;
+    right: 75%;
+}
+
+.F {
+    background: url(static?resource=images/F.png) no-repeat;
+    position: relative;
+    top: 20%;
+    color: inherit;
+    height: 18%;
+    max-width: 70%;
+    //background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+.V {
+    background: url(static?resource=images/v.png) no-repeat;
+    position: relative;
+    top: 30%;
+    color: inherit;
+    height: 18%;
+    max-width: 70%;
+//background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+.A-H {
+    background: url(static?resource=images/A2H.png) no-repeat;
+    position: relative;
+    margin-top: 10%;
+    top: 35%;
+    color: inherit;
+    height: 20%;
+    width: 100%;
+//background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+#get_power{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    //background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+#img_control_auxiliary{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+background-color: green;
+    background-size: 100% 30%;
+    -webkit-background-size: 100% 30%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 30%;/*  Konqueror  */
+    -o-background-size: 100% 30%;
+    -moz-background-size: 100% 30%;/*  Firefox  */
+}
+
 #img_control_pod{
     height: 100%;
     width: 100%;
@@ -23,6 +185,12 @@
     bottom: 9%;
 }
 
+#graph {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: -8%;
+}
 
 #background_0 {
     height:5%;
@@ -61,6 +229,7 @@
     //background: url(static?resource=images/axisboarder.png) no-repeat;
     background-size: contain;
     color: inherit;
+    padding: 0px;
     margin-left: 1%;
     margin-right: 1%;
     margin-bottom: 3%;
@@ -146,7 +315,7 @@
 }
 
 #background_2B2{
-    background: url(static?resource=images/pitchclick.png) no-repeat;
+    background: url(static?resource=images/pitchbutton.png) no-repeat;
     background-size: 100%, 100%;
     color: inherit;
     margin-left: 8%;
@@ -176,7 +345,7 @@
 }
 
 #background_2B4{
-    background: url(static?resource=images/yawclick.png) no-repeat;
+    background: url(static?resource=images/yawbutton.png) no-repeat;
     background-size: 100%, 100%;
     color: inherit;
     margin-left: 1%;
@@ -237,6 +406,7 @@
     //background: url(static?resource=images/axisboarder.png) no-repeat;
     background-size: contain;
     color: inherit;
+    padding: 0px;
     margin-bottom: 1%;
     height: 48%;
     max-width: 100%;
@@ -251,6 +421,7 @@
     //background: url(static?resource=images/axisboarder.png) no-repeat;
     background-size: contain;
     color: inherit;
+    padding: 0px;
     margin-top: 1%;
     height: 48%;
     max-width: 100%;
@@ -314,7 +485,7 @@
 }
 
 #background_3D{
-    background: url(static?resource=images/uflogo-03-03.png) no-repeat;
+    background: url(static?resource=images/uflogo.png) no-repeat;
     background-size: 100% 100%;
     color: inherit;
     margin-left: 1%;
@@ -330,12 +501,142 @@
     -moz-background-size: 100% 100%; /*  Firefox  */
 }
 
-#button1 {
-    max-width: 10%;
-    max-height: 50px;
+#FC_2A2{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
     position: relative;
-    padding-left: 5px;
-    bottom: 15px;
+    top: 7%;
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+
+}
+
+#FC_2A3{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B2{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B3{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B4{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_3A{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_3B{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2C1{
+    font-family: Monsterrat-Regular;
+    font-size: x-large;
+    text-align: left;
+    color:  white;
+
+    background-size: 100%, 100%;
+    height: 40%;
+    max-width: 100%;
+    //background-color: pink;
+    position: relative;
+    top: 45%;
+    right: 50%;
+}
+
+
+.graph .axis {
+    stroke-width: 1;
+}
+
+.graph .axis .tick line {
+    stroke: white;
+}
+
+.graph .axis .tick text {
+    fill: white;
+    font-size: 0.7em;
+}
+
+.graph .axis .domain {
+    fill: none;
+    stroke: white;
+}
+
+.graph .group {
+    fill: none;
+    stroke: white;
+    stroke-width: 1.5;
 }
 
 
