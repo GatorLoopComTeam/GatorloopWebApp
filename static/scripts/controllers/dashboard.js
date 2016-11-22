@@ -48,6 +48,9 @@ angular.module('gatorloopWebApp')
             0, 0, 0, 0, 0, 0, 0, 0 , 0, 0
         ];
         $scope.time = 0;
+        $scope.percentage = 0;
+        $scope.distanceLeft = 1609;
+
 
 //////////////   Here's where the graph code starts /////////////////////////
 
@@ -115,7 +118,7 @@ angular.module('gatorloopWebApp')
                 now = new Date();
                 for (var name in groups) {
                     var group = groups[name];
-                    if($scope.isStreaming===false) group.data.push(5);
+                    if($scope.isStreaming===false) group.data.push(0);
                     group.path.attr('d', line);
                     //console.log("velocity: " + (20 + Math.random() * 100));
                     //console.log("acceleration: " + $scope.currentAcceleration);
@@ -175,14 +178,7 @@ angular.module('gatorloopWebApp')
           });
       }
 
-      $scope.getCurrentPosition = function() {
-          dashboardService.get("position").success(function(data) {
-              $scope.currentPosition = data.position;
-              $scope.positions.push(data.position);
-          }).error(function(data) {
-              console.error("Error", data);
-          });
-      }
+
 
       $scope.getCurrentRotations = function() {
           dashboardService.get("rotation").success(function(data) {
@@ -205,8 +201,8 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentPrimaryBattery = function() {
         dashboardService.get("primarybattery").success(function(data) {
-            $scope.currentPrimaryBattery = data;
-            $scope.primaryBatterys.push(data);
+            $scope.currentPrimaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.temperature, amp: data.amp_hours };
+            $scope.primaryBatterys.push({vol: data.vol, soc: data.soc, tmp: data.tmp, amp: data.amp_hours });
         }).error(function(data) {
             console.error("Error", data);
         });
@@ -214,8 +210,8 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentAuxiliaryBattery = function() {
         dashboardService.get("auxbattery").success(function(data) {
-            $scope.currentAuxiliaryBattery = data;
-            $scope.auxiliaryBatterys.push(data);
+            $scope.currentAuxiliaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.temperature, amp: data.amp_hours };
+            $scope.auxiliaryBatterys.push({vol: data.vol, soc: data.soc, tmp: data.tmp, amp: data.amp_hours });
         }).error(function(data) {
             console.error("Error", data);
         });
@@ -231,6 +227,11 @@ angular.module('gatorloopWebApp')
                 $scope.getCurrentPosition();
                 $scope.getCurrentPrimaryBattery();
                 $scope.getCurrentAuxiliaryBattery();
+                $scope.setSecondaryBatteryLevel()
+                $scope.setPrimaryBatteryLevel();
+                $scope.setSecondaryBatteryLevel();
+                $scope.setPodPosition();
+                $scope.setDistanceLeft();
                 //tick();//$scope.graph();
               }, 750);
       }
@@ -240,22 +241,51 @@ angular.module('gatorloopWebApp')
           clearInterval($scope.interval);
       }
 
-      $scope.setPrimaryBatteryLevel = function(percent) {
-        document.getElementById("primaryBatteryLevel").style.height = (percent/100)*85 + "%";
+      $scope.setPrimaryBatteryLevel = function() {
+
+        dashboardService.get("primarybattery").success(function(data){ $scope.percentage = 100*(data.voltage / 10); });
+          document.getElementById("primaryBatteryLevel").style.top = $scope.percentage + "%";
+          document.getElementById("primaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
+          console.log($scope.percentage);
       }
 
-      $scope.setSecondaryBatteryLevel = function(percent) {
-        document.getElementById("secondaryBatteryLevel").style.height = (percent/100)*85 + "%";
+      $scope.setSecondaryBatteryLevel = function() {
+          dashboardService.get("auxbattery").success(function(data){ $scope.percentage = 100*(data.voltage / 10); });
+          document.getElementById("secondaryBatteryLevel").style.top = $scope.percentage + "%";
+          document.getElementById("secondaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
+          /*if($scope.percentage < 60) {
+              document.getElementById("secondaryBatteryLevel").style.background = ""
+          }*/
+          console.log($scope.percentage);
       }
 
-      // var level = 2;
-      // var levelInt = setInterval(function() {
-      //   document.getElementById("podIconPusher").style.width = level + "%";
-      //
-      //   level += 0.2;
-      //   if(level > 92) clearInterval(levelInt);
-      //   // $scope.setPrimaryBatteryLevel(level);
-      //   // $scope.setSecondaryBatteryLevel(level);
-      // }, 10);
+      $scope.setSecondaryBatteryLevel = function() {
+          dashboardService.get("auxbattery").success(function(data){ $scope.percentage = 100*(data.voltage / 10); });
+          document.getElementById("secondaryBatteryLevel").style.top = $scope.percentage + "%";
+          document.getElementById("secondaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
+            /*if($scope.percentage < 60) {
+             document.getElementById("secondaryBatteryLevel").style.background = ""
+             }*/
+          console.log($scope.percentage);
+      }
 
+      $scope.setDistanceLeft = function() {
+            $scope.distanceLeft = 1609 - $scope.currentPosition;
+            if($scope.distanceLeft < 0) $scope.distanceLeft = 0;
+      }
+
+      $scope.getCurrentPosition = function() {
+            dashboardService.get("position").success(function(data) {
+                $scope.currentPosition = data.position;
+                $scope.positions.push(data.position);
+            }).error(function(data) {
+                console.error("Error", data);
+            });
+      }
+
+      $scope.setPodPosition = function() {
+          if($scope.distanceLeft = 0) $scope.currentPosition = 1609;
+          document.getElementById("pod_move_control").style.marginLeft = 9 + 336*($scope.currentPosition / 1609) + "%";
+      }
+        
     });
