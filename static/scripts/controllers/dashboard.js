@@ -178,8 +178,6 @@ angular.module('gatorloopWebApp')
           });
       }
 
-
-
       $scope.getCurrentRotations = function() {
           dashboardService.get("rotation").success(function(data) {
               $scope.currentRotation = {r: data.roll, p: data.pitch, y: data.yaw};
@@ -287,5 +285,5 @@ angular.module('gatorloopWebApp')
           if($scope.distanceLeft = 0) $scope.currentPosition = 1609;
           document.getElementById("pod_move_control").style.marginLeft = 9 + 336*($scope.currentPosition / 1609) + "%";
       }
-        
+
     });

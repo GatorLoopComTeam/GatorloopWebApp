@@ -64,7 +64,7 @@
       </div>
       <div class="col-md-10" style="margin-right: 25%">
         <img id="progressive_bar" src="static?resource=images/progressivebar.png"  class="col-md-9" alt="Responsive image"/>
-        <img src="static?resource=images/startbutton.png" ng-hide="isStreaming" ng-click="startGettingData(); setPrimaryBatteryLevel();" id="button1" class="img-fluid" alt="Responsive image"/>
+        <img src="static?resource=images/startbutton.png" ng-hide="isStreaming" ng-click="startGettingData()" id="button1" class="img-fluid" alt="Responsive image"/>
         <img src="static?resource=images/stopbutton.png" ng-show="isStreaming" ng-click="stopGettingData()"  id="button2" class="img-fluid" alt="Responsive image"/>
       </div>
       </div>
@@ -77,7 +77,7 @@
           <!--////////         VELOCITY        /////////////////////////////////////////////////////////////////////-->
 
         <div id="background_2A2"class= "col-md-6">
-          <div id="FC_2A2" class="col-md-8 col-md-offset-2">{{currentVelocity}}</div>
+          <div id="FC_2A2" ng-show="isStreaming" class="col-md-8 col-md-offset-2">{{currentVelocity}}</div>
         </div>
         <!--////////          ACCELERATION        /////////////////////////////////////////////////////////////////////-->
 

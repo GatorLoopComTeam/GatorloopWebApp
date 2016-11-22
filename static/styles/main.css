@@ -84,6 +84,35 @@
     -o-background-size: 70% 80%;
     -moz-background-size: 70% 80%;/*  Firefox  */
 }
+.progress-bar-vertical {
+    min-height: 2%;
+    display: flex;
+    align-items: flex-end;
+    float: left;
+}
+#primary_container{
+    height: 67%;
+    width: 50%;
+    margin-left: 15%;
+    position: absolute;
+    bottom: 9%;
+}
+
+#secondary_container{
+    height: 67%;
+    width: 50%;
+    margin-left: 15%;
+    position: absolute;
+    bottom: 9%;
+}
+
+.progress-bar-vertical .progress-bar {
+    max-width: 100%;
+    height: 100%;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+}
 
 #primaryBatteryLevel{
     width: 100%;
