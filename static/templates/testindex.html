@@ -148,11 +148,11 @@
     <div id="background_3" class="col-md-12">
       <div id="background_3A" class= "col-md-4">
         <!--///////          DISTANCE TRAVELED        /////////////////////////////////////////////////////////////////////-->
-        <div id="FC_3A" class="col-md-8 col-md-offset-2">{{currentPosition}}</div>
+        <div id="FC_3A" class="col-md-8 col-md-offset-2">{{currentPosition | number:1}}</div>
       </div>
       <div id="background_3B" class= "col-md-3">
         <!--////////          DISTANCE LEFT        /////////////////////////////////////////////////////////////////////-->
-        <div id="FC_3B" class="col-md-8 col-md-offset-2">{{distanceLeft}}</div>
+        <div id="FC_3B" class="col-md-8 col-md-offset-2">{{1609 - currentPosition | number:1}}</div>
       </div>
       <div id="background_3C" class= "col-md-2 col-md-offset-9"></div>
       <div id="background_3D" class= "col-md-1"></div>
