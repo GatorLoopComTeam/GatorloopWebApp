@@ -1,1 +1,706 @@
 
+.jumbotron {
+    background: url(static?resource=images/background-03.png) no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover; /*  Safari  */
+    -khtml-background-size: cover; /*  Konqueror  */
+    -o-background-size: cover;
+    -moz-background-size: cover; /*  Firefox  */
+}
+
+#body {
+    font-family: "Helvetica Neue", Helvetica, Monsterrat-Regular, sans-serif;
+    height: 100vh;
+    width: 100%;
+}
+
+.grow_to_container {
+    position: relative;
+    left: 10%;
+    top: 20%;
+    height: 70%;
+    max-width: 40%;
+    padding: 0;
+}
+
+#progressive_bar {
+    max-width: 80%;
+}
+
+#button1 {
+    max-width: 10%;
+    max-height: 50px;
+    position: relative;
+    padding-left: 5px;
+    bottom: 15px;
+}
+
+#button2 {
+    max-width: 10%;
+    max-height: 50px;
+    position: relative;
+    padding-left: 5px;
+    bottom: 15px;
+}
+
+#img_control_temp{
+    max-height: 50%;
+    max-width: 50%;
+    object-fit: contain;
+    position: relative;
+    top: 20%;
+}
+
+#img_control_F{
+    background: url(static?resource=images/F.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    //background-color: yellow;
+    background-size: 100% 30%;
+    -webkit-background-size: 100% 30%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 30%;/*  Konqueror  */
+    -o-background-size: 100% 30%;
+    -moz-background-size: 100% 30%;/*  Firefox  */
+}
+
+#pod_move_control{
+    margin-left: 9%;
+}
+
+
+.img_control_battery{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 20% 70%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    padding: 0;
+    //background-color: red;
+    background-size: 70% 80%;
+    -webkit-background-size: 70% 80%;/*  Safari/Chrome  */
+    -khtml-background-size: 70% 80%;/*  Konqueror  */
+    -o-background-size: 70% 80%;
+    -moz-background-size: 70% 80%;/*  Firefox  */
+}
+.progress-bar-vertical {
+    min-height: 2%;
+    display: flex;
+    align-items: flex-end;
+    float: left;
+}
+#primary_container{
+    height: 67%;
+    width: 50%;
+    margin-left: 15%;
+    position: absolute;
+    bottom: 9%;
+}
+
+#secondary_container{
+    height: 67%;
+    width: 50%;
+    margin-left: 15%;
+    position: absolute;
+    bottom: 9%;
+}
+
+.progress-bar-vertical .progress-bar {
+    max-width: 100%;
+    height: 100%;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+}
+
+#primaryBatteryLevel{
+    width: 100%;
+    height: 100%;
+    margin-top: 0%;
+    position: absolute;
+    top: 0%;
+    background-image: none;
+    background: white; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-45deg, red, yellow, lawngreen); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-45deg, red, yellow, lawngreen); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-45deg, red, yellow, lawngreen); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-45deg, red, yellow, lawngreen); /* Standard syntax */
+}
+
+#secondaryBatteryLevel{
+    width: 100%;
+    height: 100%;
+    margin-top: 0%;
+    position: absolute;
+    top: 0%;
+    background-image: none;
+    background: white; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-45deg, red, yellow, lawngreen); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-45deg, red, yellow, lawngreen); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-45deg, red, yellow, lawngreen); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-45deg, red, yellow, lawngreen); /* Standard syntax */
+}
+
+
+.battery_input {
+    font-family: Monsterrat-Regular;
+    font-size: large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    right: 160%;
+    bottom: 20%;
+    //background-color: aqua;
+    height: 100%;
+    max-width: 100%;
+
+}
+
+#align {
+    position: relative;
+    right: 75%;
+}
+
+#align2 {
+    position: relative;
+    right: 75%;
+}
+
+.F {
+    background: url(static?resource=images/F.png) no-repeat;
+    position: relative;
+    top: 20%;
+    color: inherit;
+    height: 18%;
+    max-width: 70%;
+    //background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+.V {
+    background: url(static?resource=images/v.png) no-repeat;
+    position: relative;
+    top: 30%;
+    color: inherit;
+    height: 18%;
+    max-width: 70%;
+//background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+.A-H {
+    background: url(static?resource=images/A2H.png) no-repeat;
+    position: relative;
+    margin-top: 10%;
+    top: 35%;
+    color: inherit;
+    height: 20%;
+    width: 100%;
+//background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+#get_power{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    //background-color: red;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 100%;/*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;/*  Firefox  */
+}
+
+#img_control_auxiliary{
+    background: url(static?resource=images/batteryempty.png) no-repeat;
+    background-position: 50% 65%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+background-color: green;
+    background-size: 100% 30%;
+    -webkit-background-size: 100% 30%;/*  Safari/Chrome  */
+    -khtml-background-size: 100% 30%;/*  Konqueror  */
+    -o-background-size: 100% 30%;
+    -moz-background-size: 100% 30%;/*  Firefox  */
+}
+
+#img_control_pod{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    bottom: 9%;
+}
+
+#graph {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    left: -8%;
+}
+
+#background_0 {
+    height:5%;
+    margin-bottom: 0.5%;
+    //background-color: red;
+}
+
+#background_1 {
+    height:10%;
+    //background-color: red;
+
+}
+
+#background_2{
+    height: 65%;
+    margin-top: 10px;
+    //background-color: red;
+}
+
+#background_2A{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: contain;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 2%;
+    height: 100%;
+    max-width: 40%;
+    //background-color: green;
+    -webkit-background-size: contain; /*  Safari  */
+    -khtml-background-size: contain; /*  Konqueror  */
+    -o-background-size: contain;
+    -moz-background-size: contain; /*  Firefox  */
+}
+
+#background_2A1{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: contain;
+    color: inherit;
+    padding: 0px;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 3%;
+    height: 70%;
+    max-width: 100%;
+    //background-color: yellow;
+    -webkit-background-size: contain; /*  Safari  */
+    -khtml-background-size: contain; /*  Konqueror  */
+    -o-background-size: contain;
+    -moz-background-size: contain; /*  Firefox  */
+}
+
+#background_2A2{
+    background: url(static?resource=images/velocitybutton.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 33%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2A3{
+    background: url(static?resource=images/accelerationclick.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 37%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: 100% 100%;
+    color: inherit;
+    height: 100%;
+    max-width: 35%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B1{
+    background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: 100% 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 15%;
+    height: 60%;
+    max-width: 100%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B1_axis{
+    background: url(static?resource=images/axis.png) no-repeat;
+    background-size: 100% 100%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B2{
+    background: url(static?resource=images/pitchbutton.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 8%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 27.5%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B3{
+    background: url(static?resource=images/rollclick.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 27.5%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2B4{
+    background: url(static?resource=images/yawbutton.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 27.5%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2C{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: contain;
+    color: inherit;
+    height: 100%;
+    max-width: 35%;
+    //background-color: green;
+    -webkit-background-size: contain; /*  Safari  */
+    -khtml-background-size: contain; /*  Konqueror  */
+    -o-background-size: contain;
+    -moz-background-size: contain; /*  Firefox  */
+}
+
+#background_2C1{
+    background: url(static?resource=images/temperaturebox.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-bottom: 1%;
+    height: 25%;
+    max-width: 90%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_2C2{
+    background: url(static?resource=images/batterybox.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-top: 10%;
+    margin-bottom: 1%;
+    height: 63%;
+    max-width: 90%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+
+}
+
+#background_2C2A{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: contain;
+    color: inherit;
+    padding: 0px;
+    margin-bottom: 1%;
+    height: 48%;
+    max-width: 100%;
+    //background-color: orange;
+    -webkit-background-size: contain; /*  Safari  */
+    -khtml-background-size: contain; /*  Konqueror  */
+    -o-background-size: contain;
+    -moz-background-size: contain; /*  Firefox  */
+}
+
+#background_2C2B{
+    //background: url(static?resource=images/axisboarder.png) no-repeat;
+    background-size: contain;
+    color: inherit;
+    padding: 0px;
+    margin-top: 1%;
+    height: 48%;
+    max-width: 100%;
+    //background-color: orange;
+    -webkit-background-size: contain; /*  Safari  */
+    -khtml-background-size: contain; /*  Konqueror  */
+    -o-background-size: contain;
+    -moz-background-size: contain; /*  Firefox  */
+}
+
+#background_3{
+    height: 15%;
+    margin-top: 1%;
+    //background-color: red;
+}
+
+#background_3A{
+    background: url(static?resource=images/distancetravelled.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 2.25%;
+    margin-right: 1%;
+    height: 85%;
+    max-width: 20%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_3B{
+    background: url(static?resource=images/distanceleft.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-right: 30%;
+    height: 85%;
+    max-width: 15%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_3C{
+    background: url(static?resource=images/gatorlooplogo-03-03.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 9%;
+    height: 50%;
+    max-width: 9%;
+    position: relative;
+    top: 30%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+
+}
+
+#background_3D{
+    background: url(static?resource=images/uflogo.png) no-repeat;
+    background-size: 100% 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 65%;
+    max-width: 5%;
+    position: relative;
+    top: 12%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#FC_2A2{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+
+}
+
+#FC_2A3{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B2{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B3{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2B4{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_3A{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_3B{
+    font-family: Monsterrat-Regular;
+    font-size: xx-large;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    //background-color: pink;
+}
+
+#FC_2C1{
+    font-family: Monsterrat-Regular;
+    font-size: x-large;
+    text-align: left;
+    color:  white;
+
+    background-size: 100%, 100%;
+    height: 40%;
+    max-width: 100%;
+    //background-color: pink;
+    position: relative;
+    top: 45%;
+    right: 50%;
+}
+
+
+.graph .axis {
+    stroke-width: 1;
+}
+
+.graph .axis .tick line {
+    stroke: white;
+}
+
+.graph .axis .tick text {
+    fill: white;
+    font-size: 0.7em;
+}
+
+.graph .axis .domain {
+    fill: none;
+    stroke: white;
+}
+
+.graph .group {
+    fill: none;
+    stroke: white;
+    stroke-width: 1.5;
+}
+
+
+

@@ -9,87 +9,157 @@
     <title>Gatorloop</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/node_modules?resource=bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static?resource=styles/main.css">
-    <!-- <script type="text/javascript" src="//cdn.socket.io/socket.io-1.1.0.js" integrity="ni:///sha-256;4omls-f3OZnoi9yQzyNT9_vPSo8hb-oTnjdwgyUcJV8=?ct=application/javascript"></script> -->
-  </head>
-  <body ng-app="gatorloopWebApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <div ng-controller="dashboardCTRL">
-      <button ng-click="startGettingData()">start</button>
-      <button ng-click="stopGettingData()">stop</button>
-      <table>
-        <thead>
-          <th style="text-align:center; padding: 20px;">Current Velocity <h4>{{currentVelocity}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Acceleration <h4>{{currentAcceleration}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Position <h4>{{currentPosition}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Temperature <h4>{{currentTemperature}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Primary Battery <h4>{{currentPrimaryBattery}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Aux Battery <h4>{{currentAuxiliaryBattery}}</h4></th>
-          <th style="text-align:center; padding: 20px;">Current Rotations <h4>{{currentRotation}}</h4></th>
-
-        </thead>
-        <tbody style="text-align:center;">
-          <tr>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="v in velocities track by $index">
-                  <td>{{v}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="a in accelerations track by $index">
-                  <td>{{a}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in positions track by $index">
-                  <td>{{p}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="t in temperatures track by $index">
-                  <td>{{t}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="p in primaryBatterys track by $index">
-                  <td>{{p.voltage}}, {{p.soc}}, {{p.temperature}}, {{p.amp_hours}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="a in auxiliaryBatterys track by $index">
-                  <td>{{a.voltage}}, {{a.soc}}, {{a.temperature}}, {{a.amp_hours}}</td>
-                </tr>
-              </table>
-            </td>
-            <td style="border-left: solid 1px black;">
-              <table>
-                <tr ng-repeat="r in rotations track by $index">
-                  <td>{{r.r}}, {{r.p}}, {{r.y}}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+    <!--script src="http://d3js.org/d3.v4.min.js"></script-->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="/node_modules?resource=angular/angular.js"></script>
     <script src="/static?resource=scripts/app.js"></script>
+    <style>
+      .progress-bar-vertical {
+        min-height: 2%;
+        display: flex;
+        align-items: flex-end;
+        float: left;
+      }
+      #primary_container{
+        height: 67%;
+        width: 50%;
+        margin-left: 15%;
+        position: absolute;
+        bottom: 9%;
+      }
+
+      #secondary_container{
+        height: 67%;
+        width: 50%;
+        margin-left: 15%;
+        position: absolute;
+        bottom: 9%;
+      }
+
+      .progress-bar-vertical .progress-bar {
+        max-width: 100%;
+        height: 100%;
+        -webkit-transition: height 0.6s ease;
+        -o-transition: height 0.6s ease;
+        transition: height 0.6s ease;
+      }
+
+    </style>
     <script src="/static?resource=scripts/controllers/dashboard.js"></script>
     <script src="/static?resource=scripts/services/dashboardService.js"></script>
-</body>
-</html>
+    <!-- <script type="text/javascript" src="//cdn.socket.io/socket.io-1.1.0.js" integrity="ni:///sha-256;4omls-f3OZnoi9yQzyNT9_vPSo8hb-oTnjdwgyUcJV8=?ct=application/javascript"></script> -->
+  </head>
+  <body ng-app="gatorloopWebApp" ng-controller="dashboardCTRL" id="body" class="col-md-12 jumbotron">
+      <!--p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <!--  ////////         ROW 1        /////////////////////////////////////////////////////////////////////-->
+
+      <div id="background_1" class="col-md-12">
+      <div class="col-md-2" >
+        <img id="pod_move_control" src="static?resource=images/podicon-03.png" class="col-md-8 col-md-offset-1"  alt="Responsive image"/>
+      </div>
+      <div class="col-md-10" style="margin-right: 25%">
+        <img id="progressive_bar" src="static?resource=images/progressivebar.png"  class="col-md-9" alt="Responsive image"/>
+        <img src="static?resource=images/startbutton.png" ng-hide="isStreaming" ng-click="startGettingData()" id="button1" class="img-fluid" alt="Responsive image"/>
+        <img src="static?resource=images/stopbutton.png" ng-show="isStreaming" ng-click="stopGettingData()"  id="button2" class="img-fluid" alt="Responsive image"/>
+      </div>
+      </div>
+
+    <!--  ////////         ROW 2        /////////////////////////////////////////////////////////////////////-->
+    <div id="background_2" class="col-md-12">
+      <div id="background_2A" class="col-md-5">
+        <!--////////         GRAPH        /////////////////////////////////////////////////////////////////////-->
+        <div id="background_2A1" class= "col-md-12 graph"></div>
+          <!--////////         VELOCITY        /////////////////////////////////////////////////////////////////////-->
+
+        <div id="background_2A2"class= "col-md-6">
+          <div id="FC_2A2" ng-show="isStreaming" class="col-md-8 col-md-offset-2">{{currentVelocity}}</div>
+        </div>
+        <!--////////          ACCELERATION        /////////////////////////////////////////////////////////////////////-->
+
+        <div id="background_2A3"class= "col-md-6">
+          <div id="FC_2A3" class="col-md-8 col-md-offset-2">{{currentAcceleration}}</div>
+        </div>
+      </div>
+      <!--////////          POD       /////////////////////////////////////////////////////////////////////-->
+
+      <div id="background_2B" class="col-md-5">
+        <div id="background_2B1" class= "col-md-12">
+          <div id="background_2B1_axis" class= "col-md-12">
+          <img id="img_control_pod" src="static?resource=images/podmodel.png"/>
+          </div>
+        </div>
+        <!--////////          PITCH ROLL YAW       /////////////////////////////////////////////////////////////////////-->
+        <div id="background_2B2" class= "col-md-4">
+          <div id="FC_2B2" class="col-md-8 col-md-offset-2">{{currentRotation.r}}</div>
+        </div>
+        <div id="background_2B3" class= "col-md-4">
+          <div id="FC_2B3" class="col-md-8 col-md-offset-2">{{currentRotation.p}}</div>
+        </div>
+        <div id="background_2B4" class= "col-md-4">
+          <div id="FC_2B4" class="col-md-8 col-md-offset-2">{{currentRotation.y}}</div>
+        </div>
+      </div>
+      <!--////////          TEMPERATURE        /////////////////////////////////////////////////////////////////////-->
+
+      <div id="background_2C" class="col-md-2">
+        <div id="background_2C1" class= "col-md-12">
+          <img id="img_control_temp" class="col-md-5" src="static?resource=images/temperatureicon.png" />
+          <div id="img_control_F" class="col-md-7">
+            <div id="FC_2C1" class="col-md-10 col-md-offset-1">{{currentTemperature}}</div>
+          </div>
+        </div>
+        <div id="background_2C2" class= "col-md-12">
+          <!--////////          PRIMARY BATTERY        /////////////////////////////////////////////////////////////////////-->
+          <div id="background_2C2A" class= "col-md-12">
+            <div class="img_control_battery col-md-5">
+              <div id="primary_container">
+                <div id="primaryBatteryLevel" class="progress progress-bar-vertical progress-bar-striped active"></div>
+              </div>
+            </div>
+            <div class="grow_to_container col-md-7">
+              <div class="F col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.tmp | number:1}}</div></div>
+              <div class="V col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.vol}}</div></div>
+              <div class="A-H col-md-12"><div id="align" class="battery_input col-md-10">{{currentPrimaryBattery.amp | number:0}}</div></div>
+            </div>
+          </div>
+          <!--////////          AUX BATTERY       /////////////////////////////////////////////////////////////////////-->
+          <div id="background_2C2B" class= "col-md-12">
+              <div class="img_control_battery col-md-5">
+                <div id="secondary_container">
+                  <div id="secondaryBatteryLevel" class="progress progress-bar-vertical progress-bar-striped active"></div>
+                </div>
+              </div>
+              <div class="grow_to_container col-md-7">
+                <div class="F col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.tmp | number:1}}</div></div>
+                <div class="V col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.vol}}</div></div>
+                <div class="A-H col-md-12"><div id="align2" class="battery_input col-md-10">{{currentAuxiliaryBattery.amp | number:0}}</div></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!--////////         ROW 3        /////////////////////////////////////////////////////////////////////-->
+    <div id="background_3" class="col-md-12">
+      <div id="background_3A" class= "col-md-4">
+        <!--///////          DISTANCE TRAVELED        /////////////////////////////////////////////////////////////////////-->
+        <div id="FC_3A" class="col-md-8 col-md-offset-2">{{currentPosition | number:1}}</div>
+      </div>
+      <div id="background_3B" class= "col-md-3">
+        <!--////////          DISTANCE LEFT        /////////////////////////////////////////////////////////////////////-->
+        <div id="FC_3B" class="col-md-8 col-md-offset-2">{{1609 - currentPosition | number:1}}</div>
+      </div>
+      <div id="background_3C" class= "col-md-2 col-md-offset-9"></div>
+      <div id="background_3D" class= "col-md-1"></div>
+    </div>
+  </body>
+<html>
+
+
+
+
