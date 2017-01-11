@@ -77,6 +77,16 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 		To(s.EmergencyStop).
 		Doc("Initiates an emergency stop of the pod."))
 
+	var state api.State
+	ws.Route(ws.GET("/state").
+		To(state.GetRecent).
+		Doc("Gets the current state of the pod."))
+
+	var brakeStatus api.BrakeStatus
+	ws.Route(ws.GET("/brakestatus").
+		To(brakeStatus.GetRecent).
+		Doc("Gets the status of the primary and aux brakes"))
+
 	restful.Add(ws)
 
 	config := swagger.Config{
