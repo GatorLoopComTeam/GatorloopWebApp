@@ -28,6 +28,13 @@
 
     <h4>Primary Brakes Engaged: {{primaryBrakesEngaged}}</h4>
     <h4>Auxiliary Brakes Engaged: {{auxiliaryBrakesEngaged}}</h4>
+    <h4>Power On: {{powerOn}}</h4>
+
+    <button ng-click="sendEmergencyBrake()">Engage Emergency Brake</button>
+    <button ng-click="sendKillPower()">Send Kill Power</button>
+
+    <br />
+    <br />
 
     <!-- Main Battery Table -->
     <table>

@@ -14,13 +14,13 @@ type KillPower struct {
 	KillPower bool `json:"kill_power"`
 }
 
-// KillPower : sends kill power signal to python controller
+// KillPower: sends kill power signal to python controller
 func (k KillPower) SendKillPower(request *restful.Request, response *restful.Response) {
 	conn, err := net.Dial("tcp", "127.0.0.1:6666")
 	if err != nil {
 		// handle error
 		log.Error("Could not connect to kill power socket!")
-		response.WriteEntity(Stop{false})
+		response.WriteEntity(KillPower{false})
 		return
 	}
 	fmt.Fprintf(conn, "KILL\n")

@@ -14,6 +14,7 @@ angular.module('gatorloopWebApp')
       $scope.currentState = "";
       $scope.primaryBrakesEngaged = false;
       $scope.auxiliaryBrakesEngaged = false;
+      $scope.powerOn = true;
 
       $scope.getPrimaryBattery = function() {
         dashboardService.get("primarybattery").success(function(data) {
@@ -52,6 +53,35 @@ angular.module('gatorloopWebApp')
           $scope.primaryBrakesEngaged = data.primary_engaged;
           $scope.auxiliaryBrakesEngaged = data.auxiliary_engaged;
         })
+      }
+
+      $scope.sendEmergencyBrake = function() {
+        dashboardService.get("/stop").success(function(data) {
+          console.log("sent emergency brake");
+          console.log(data);
+
+          if (data.stop === true) {
+            $scope.primaryBrakesEngaged = data.primary_engaged;
+            $scope.auxiliaryBrakesEngaged = data.auxiliary_engaged;
+          }
+        }).error(function(err) {
+          console.log("error engaging ebrake");
+          console.log(err);
+        });
+      }
+
+      $scope.sendKillPower = function() {
+        dashboardService.get("/killpower").success(function(data) {
+          console.log("sent kill power");
+          console.log(data);
+
+          if (data.kill_power === true) {
+            $scope.powerOn = false;
+          }
+        }).error(function(err) {
+          console.log("error killing power");
+          console.log(err);
+        });
       }
 
       $scope.startGettingData = function(){
