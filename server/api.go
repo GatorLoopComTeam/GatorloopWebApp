@@ -77,6 +77,11 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 		To(s.EmergencyStop).
 		Doc("Initiates an emergency stop of the pod."))
 
+	var k api.KillPower
+	ws.Route(ws.GET("/killpower").
+		To(k.SendKillPower).
+		Doc("Throws the circuit breaker on the pod to kill power."))
+
 	var state api.State
 	ws.Route(ws.GET("/state").
 		To(state.GetRecent).
@@ -96,7 +101,7 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 
 		// Optionally, specifiy where the UI is located
 		SwaggerPath:     "/apidocs/",
-		SwaggerFilePath: "/home/elan/gocode/src/github.com/gatorloopwebapp/swagger-ui/dist"}
+		SwaggerFilePath: "/home/pi/go/src/github.com/gatorloopwebapp/swagger-ui/dist"}
 	swagger.RegisterSwaggerService(config, restful.DefaultContainer)
 }
 
