@@ -14,7 +14,7 @@ type KillPower struct {
 	KillPower bool `json:"kill_power"`
 }
 
-// KillPower: sends kill power signal to python controller
+// SendKillPower : sends kill power signal to python controller
 func (k KillPower) SendKillPower(request *restful.Request, response *restful.Response) {
 	conn, err := net.Dial("tcp", "127.0.0.1:6666")
 	if err != nil {

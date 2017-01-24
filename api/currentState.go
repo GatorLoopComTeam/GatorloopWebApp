@@ -16,7 +16,7 @@ type State struct {
 
 // GetRecent : gets the most recent state value
 func (s State) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT state FROM gatorloop.States ORDER BY idState DESC LIMIT 1")
+	row := database.DB.QueryRow("SELECT state FROM gatorloop.states ORDER BY idState DESC LIMIT 1")
 	var resState sql.NullString
 	err := row.Scan(&resState)
 	if err != nil {

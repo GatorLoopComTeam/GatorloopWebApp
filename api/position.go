@@ -7,7 +7,6 @@ import (
 	log "github.com/Sirupsen/logrus"
 	restful "github.com/emicklei/go-restful"
 	"github.com/gatorloopwebapp/database"
-	"github.com/gatorloopwebapp/server/constants"
 )
 
 // Position : struct to hold position values
@@ -18,7 +17,7 @@ type Position struct {
 
 // GetRecent : gets the most recent position
 func (p Position) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT position FROM gatorloop.Position ORDER BY idPosition DESC LIMIT 1")
+	row := database.DB.QueryRow("SELECT position FROM gatorloop.wheel1speed ORDER BY idWheel1Speed DESC LIMIT 1")
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
@@ -32,7 +31,7 @@ func (p Position) GetRecent(request *restful.Request, response *restful.Response
 	}
 	var ret Position
 	if res.Valid {
-		ret = Position{res.Float64, res.Float64 / constants.TotalPodDistance}
+		ret = Position{res.Float64, res.Float64 / TotalTrackLength}
 	} else {
 		ret = Position{0, 0}
 	}

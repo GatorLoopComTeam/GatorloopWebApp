@@ -52,11 +52,6 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 		To(p.GetRecent).
 		Doc("Get the most recent position."))
 
-	var r api.Rotations
-	ws.Route(ws.GET("/rotation").
-		To(r.GetRecent).
-		Doc("Get the most recent rotation."))
-
 	var t api.Temperature
 	ws.Route(ws.GET("/temperature").
 		To(t.GetRecent).
@@ -86,11 +81,6 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 	ws.Route(ws.GET("/state").
 		To(state.GetRecent).
 		Doc("Gets the current state of the pod."))
-
-	var brakeStatus api.BrakeStatus
-	ws.Route(ws.GET("/brakestatus").
-		To(brakeStatus.GetRecent).
-		Doc("Gets the status of the primary and aux brakes"))
 
 	restful.Add(ws)
 

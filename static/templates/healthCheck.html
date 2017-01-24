@@ -24,10 +24,8 @@
 </head>
 <body ng-app="gatorloopWebApp">
   <div ng-controller="healthCheckCTRL">
-    <h4>Current State: {{currentState}}</h4>
+    <h4>Current State: {{currentState ? currentState : "Initialization"}}</h4>
 
-    <h4>Primary Brakes Engaged: {{primaryBrakesEngaged}}</h4>
-    <h4>Auxiliary Brakes Engaged: {{auxiliaryBrakesEngaged}}</h4>
     <h4>Power On: {{powerOn}}</h4>
 
     <button ng-click="sendEmergencyBrake()">Engage Emergency Brake</button>
@@ -58,7 +56,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-class="primaryBattery.temperature > batteryTempUpperBound || primaryBattery.temperature < batteryTempLowerBound ? 'unhealthy': 'healthy'">
+        <tr ng-class="primaryBattery.pack1_temp > batteryTempUpperBound || primaryBattery.pack1_temp < batteryTempLowerBound ? 'unhealthy': 'healthy'">
           <td>
             Temperature
           </td>
@@ -66,14 +64,14 @@
             -20 °C
           </td>
           <td class="center">
-            {{primaryBattery.temperature}} °C
+            {{primaryBattery.pack1_temp | number:2}} °C
           </td>
           <td class="center">
             70 °C
           </td>
         </tr>
 
-        <tr ng-class="primaryBattery.voltage < batteryVoltageLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="primaryBattery.voltage < batteryVoltageLowerBound || primaryBattery.voltage > batteryVoltageUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             Voltage
           </td>
@@ -81,14 +79,14 @@
             {{batteryVoltageLowerBound}} V
           </td>
           <td class="center">
-            {{primaryBattery.voltage}} V
+            {{primaryBattery.voltage | number:2}} V
           </td>
           <td class="center">
             {{batteryVoltageUpperBound}} V
           </td>
         </tr>
 
-        <tr ng-class="primaryBattery.soc < batterySOCLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="primaryBattery.soc < batterySOCLowerBound || primaryBattery.soc > batterySOCUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             State of Charge
           </td>
@@ -96,14 +94,14 @@
             {{batterySOCLowerBound}}%
           </td>
           <td class="center">
-            {{primaryBattery.soc}}%
+            {{primaryBattery.soc | number:2}}%
           </td>
           <td class="center">
             {{batterySOCUpperBound}}%
           </td>
         </tr>
 
-        <tr ng-class="primaryBattery.amp_hours < batteryAHLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="primaryBattery.amp_hours < batteryAHLowerBound || primaryBattery.amp_hours > batteryAHUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             A-H
           </td>
@@ -111,7 +109,7 @@
             {{batteryAHLowerBound}}
           </td>
           <td class="center">
-            {{primaryBattery.amp_hours}}
+            {{primaryBattery.amp_hours | number:2}}
           </td>
           <td class="center">
             {{batteryAHUpperBound}}
@@ -145,7 +143,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-class="auxBattery.temperature > batteryTempUpperBound || auxBattery.temperature < batteryTempLowerBound ? 'unhealthy': 'healthy'">
+        <tr ng-class="auxBattery.pack1_temp > batteryTempUpperBound || auxBattery.pack1_temp < batteryTempLowerBound ? 'unhealthy': 'healthy'">
           <td>
             Temperature
           </td>
@@ -153,14 +151,14 @@
             -20 °C
           </td>
           <td class="center">
-            {{auxBattery.temperature}} °C
+            {{auxBattery.pack1_temp | number:2}} °C
           </td>
           <td class="center">
             70 °C
           </td>
         </tr>
 
-        <tr ng-class="auxBattery.voltage < batteryVoltageLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="auxBattery.voltage < batteryVoltageLowerBound || auxBattery.voltage > batteryVoltageUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             Voltage
           </td>
@@ -168,14 +166,14 @@
             {{batteryVoltageLowerBound}} V
           </td>
           <td class="center">
-            {{auxBattery.voltage}} V
+            {{auxBattery.voltage | number:2}} V
           </td>
           <td class="center">
             {{batteryVoltageUpperBound}} V
           </td>
         </tr>
 
-        <tr ng-class="auxBattery.soc < batterySOCLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="auxBattery.soc < batterySOCLowerBound || auxBattery.soc > batterySOCUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             State of Charge
           </td>
@@ -183,14 +181,14 @@
             {{batterySOCLowerBound}}%
           </td>
           <td class="center">
-            {{auxBattery.soc}}%
+            {{auxBattery.soc | number:2}}%
           </td>
           <td class="center">
             {{batterySOCUpperBound}}%
           </td>
         </tr>
 
-        <tr ng-class="auxBattery.amp_hours < batteryAHLowerBound ? 'unhealthy' : 'healthy'">
+        <tr ng-class="auxBattery.amp_hours < batteryAHLowerBound || auxBattery.amp_hours > batteryAHUpperBound ? 'unhealthy' : 'healthy'">
           <td>
             A-H
           </td>
@@ -198,7 +196,7 @@
             {{batteryAHLowerBound}}
           </td>
           <td class="center">
-            {{auxBattery.amp_hours}}
+            {{auxBattery.amp_hours | number:2}}
           </td>
           <td class="center">
             {{batteryAHUpperBound}}
