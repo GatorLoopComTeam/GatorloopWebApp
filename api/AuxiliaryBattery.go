@@ -79,7 +79,7 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 		soc = math.Max((resVoltage.Float64-MinVoltage)/(MaxVoltage-MinVoltage), 0)
 	}
 	ret = AuxiliaryBattery{
-		validOrZero(resVoltage),
+		validOrZero(resVoltage) / 1000,
 		soc * 100,
 		validOrZero(resPack1),
 		validOrZero(resPack2),
