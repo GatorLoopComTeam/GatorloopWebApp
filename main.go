@@ -17,6 +17,6 @@ func main() {
 	server.RegisterAPI("/api", wsContainer)
 	database.InitDB()
 
-	log.Info("hosting server on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Info("hosting server on http://0.0.0.0:8080")
+	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
