@@ -26,6 +26,13 @@ func validOrZero(val sql.NullFloat64) float64 {
 	return 0
 }
 
+func validOrErrCode(val sql.NullFloat64) float64 {
+	if val.Valid {
+		return val.Float64
+	}
+	return -65001
+}
+
 // GetRecent : gets the most recent PrimaryBattery values
 func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.Response) {
 	row := database.DB.QueryRow("SELECT vs FROM gatorloop.bms ORDER BY idBMS DESC LIMIT 1")
@@ -81,9 +88,9 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 	ret = AuxiliaryBattery{
 		validOrZero(resVoltage) / 1000,
 		soc * 100,
-		validOrZero(resPack1),
-		validOrZero(resPack2),
-		validOrZero(resPack3),
+		validOrErrCode(resPack1),
+		validOrErrCode(resPack2),
+		validOrErrCode(resPack3),
 		soc * TotalAmpHours,
 	}
 	response.WriteEntity(ret)

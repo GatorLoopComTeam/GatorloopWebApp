@@ -64,7 +64,7 @@
             -20 °C
           </td>
           <td class="center">
-            {{primaryBattery.pack1_temp | number:2}} °C
+            {{primaryBattery.pack1_temp == -65001 ? "Error" : (primaryBattery.pack1_temp| number:2)}} °C
           </td>
           <td class="center">
             70 °C
@@ -151,7 +151,7 @@
             -20 °C
           </td>
           <td class="center">
-            {{auxBattery.pack1_temp | number:2}} °C
+            {{auxBattery.pack1_temp == -65001 ? "Error" : (auxBattery.pack1_temp| number:2)}} °C
           </td>
           <td class="center">
             70 °C

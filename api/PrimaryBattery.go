@@ -74,9 +74,9 @@ func (p PrimaryBattery) GetRecent(request *restful.Request, response *restful.Re
 	ret = PrimaryBattery{
 		validOrZero(resVoltage) / 1000,
 		soc * 100,
-		validOrZero(resPack1),
-		validOrZero(resPack2),
-		validOrZero(resPack3),
+		validOrErrCode(resPack1),
+		validOrErrCode(resPack2),
+		validOrErrCode(resPack3),
 		soc * TotalAmpHours,
 	}
 	response.WriteEntity(ret)
