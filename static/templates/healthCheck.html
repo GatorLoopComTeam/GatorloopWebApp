@@ -26,8 +26,6 @@
   <div ng-controller="healthCheckCTRL">
     <h4>Current State: {{currentState ? currentState : "Initialization"}}</h4>
 
-    <h4>Power On: {{powerOn}}</h4>
-
     <button ng-click="sendEmergencyBrake()">Engage Emergency Brake</button>
     <button ng-click="sendKillPower()">Send Kill Power</button>
 
@@ -216,6 +214,14 @@
     </table>
 
   </div>
+
+  <br />
+  <br />
+
+  <h4>Velocity: {{currentVelocity}}</h4>
+  <h4>Acceleration: {{currentAcceleration}}</h4>
+
+
 
   <script src="/node_modules?resource=angular/angular.js"></script>
   <script src="/static?resource=scripts/app.js"></script>

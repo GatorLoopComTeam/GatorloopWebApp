@@ -14,7 +14,8 @@ angular.module('gatorloopWebApp')
       $scope.currentState = "";
       $scope.primaryBrakesEngaged = false;
       $scope.auxiliaryBrakesEngaged = false;
-      $scope.powerOn = true;
+      $scope.currentVelocity = 0;
+      $scope.currentAcceleration = 0;
 
       $scope.getPrimaryBattery = function() {
         dashboardService.get("primarybattery").success(function(data) {
@@ -84,11 +85,29 @@ angular.module('gatorloopWebApp')
         });
       }
 
+      $scope.getCurrentVelocity = function() {
+          dashboardService.get("velocity").success(function(data) {
+              $scope.currentVelocity = data.velocity;
+          }).error(function(data) {
+              console.error("Error", data);
+          });
+      }
+
+      $scope.getCurrentAcceleration = function() {
+          dashboardService.get("acceleration").success(function(data) {
+              $scope.currentAcceleration = data.acceleration;
+          }).error(function(data) {
+              console.error("Error", data);
+          });
+      }
+
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
                 $scope.getPrimaryBattery();
                 $scope.getAuxiliaryBattery();
                 $scope.getCurrentState();
+                $scope.getCurrentVelocity();
+                $scope.getCurrentAcceleration();
                 // $scope.getBrakeStatus();
               }, 2000);
       }
