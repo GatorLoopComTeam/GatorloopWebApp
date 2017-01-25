@@ -1,10 +1,10 @@
 package api
 
 // MaxVoltage : maximum acceptable battery voltage
-const MaxVoltage = 40.8
+const MaxVoltage = 40800
 
 // MinVoltage : minimum acceptable battery voltage
-const MinVoltage = 32
+const MinVoltage = 32000
 
 // TotalAmpHours : total A-H of the battery
 const TotalAmpHours = 40
