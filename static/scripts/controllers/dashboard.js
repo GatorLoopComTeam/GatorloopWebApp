@@ -35,7 +35,6 @@ angular.module('gatorloopWebApp')
       $scope.getCurrentAcceleration = function() {
           dashboardService.get("acceleration").success(function(data) {
               $scope.currentAcceleration = data.acceleration;
-              $scope.accelerations.push(data.acceleration);
           }).error(function(data) {
               console.error("Error", data);
           });
@@ -43,7 +42,7 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentPrimaryBattery = function() {
         dashboardService.get("primarybattery").success(function(data) {
-            $scope.currentPrimaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.pack1_temp, amp: data.amp_hours };
+            $scope.currentPrimaryBattery = {vol: data.voltage, soc: data.soc, tmp: Math.max(data.pack1_temp, data.pack2_temp, data.pack3_temp), amp: data.amp_hours };
         }).error(function(data) {
             console.error("Error", data);
         });
@@ -51,7 +50,7 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentAuxiliaryBattery = function() {
         dashboardService.get("auxbattery").success(function(data) {
-            $scope.currentAuxiliaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.pack1_temp, amp: data.amp_hours };
+            $scope.currentAuxiliaryBattery = {vol: data.voltage, soc: data.soc, tmp: Math.max(data.pack1_temp, data.pack2_temp, data.pack3_temp), amp: data.amp_hours };
         }).error(function(data) {
             console.error("Error", data);
         });
