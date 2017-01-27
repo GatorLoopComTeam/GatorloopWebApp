@@ -109,7 +109,7 @@ angular.module('gatorloopWebApp')
                 $scope.getCurrentVelocity();
                 $scope.getCurrentAcceleration();
                 // $scope.getBrakeStatus();
-              }, 2000);
+              }, 750);
       }
 
       $scope.startGettingData();
