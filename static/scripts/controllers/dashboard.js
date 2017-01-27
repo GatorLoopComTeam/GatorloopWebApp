@@ -3,51 +3,7 @@
 angular.module('gatorloopWebApp')
     .controller('dashboardCTRL', function($scope, dashboardService, $timeout) {
         $scope.isStreaming = false;
-        $scope.currentVelocity = {x: 0, y: 0};
-        $scope.velocities = [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0 , 0, 0
-        ];
-        $scope.currentTemperature = 0;
-        $scope.temperatures = [];
-        $scope.currentPosition = 0;
-        $scope.positions = [];
-        $scope.positionPercentage = 0;
-        $scope.primaryBatterys = [];
-        $scope.currentPrimaryBattery = {
-            vol: 0,
-            soc: 0,
-            tmp: 0,
-            amp: 0
-        }
-        $scope.auxiliaryBatterys = [];
-        $scope.currentAuxiliaryBattery = {
-            vol: 0,
-            soc: 0,
-            tmp: 0,
-            amp: 0
-        }
-        $scope.currentRotation = {
-            //roll, pitch, yaw values
-            r: 0,
-            p: 0,
-            y: 0
-        };
-        $scope.rotations = [];
-        $scope.currentAcceleration = 0;
-        $scope.accelerations = [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0 , 0, 0
-        ];
-        $scope.time = 0;
+
         $scope.percentage = 0;
         $scope.distanceLeft = 1609;
 
