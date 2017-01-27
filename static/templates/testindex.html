@@ -56,63 +56,50 @@
     <![endif]-->
 
 
-    <!--  ////////         ROW 1        /////////////////////////////////////////////////////////////////////-->
 
-      <div id="background_1" class="col-md-12">
-      <div class="col-md-2" >
-        <img id="pod_move_control" src="static?resource=images/podicon-03.png" class="col-md-8 col-md-offset-1"  alt="Responsive image"/>
-      </div>
-      <div class="col-md-10" style="margin-right: 25%">
-        <img id="progressive_bar" src="static?resource=images/progressivebar.png"  class="col-md-9" alt="Responsive image"/>
-        <img src="static?resource=images/startbutton.png" ng-hide="isStreaming" ng-click="startGettingData()" id="button1" class="img-fluid" alt="Responsive image"/>
-        <img src="static?resource=images/stopbutton.png" ng-show="isStreaming" ng-click="stopGettingData()"  id="button2" class="img-fluid" alt="Responsive image"/>
-      </div>
-      </div>
 
     <!--  ////////         ROW 2        /////////////////////////////////////////////////////////////////////-->
     <div id="background_2" class="col-md-12">
       <div id="background_2A" class="col-md-5">
-        <!--////////         GRAPH        /////////////////////////////////////////////////////////////////////-->
-        <div id="background_2A1" class= "col-md-12 graph"></div>
           <!--////////         VELOCITY        /////////////////////////////////////////////////////////////////////-->
 
         <div id="background_2A2"class= "col-md-6">
-          <div id="FC_2A2" ng-show="isStreaming" class="col-md-8 col-md-offset-2">{{currentVelocity}}</div>
+          <div id="FC_2A2" class="col-md-8 col-md-offset-2">{{currentVelocity}}</div>
         </div>
         <!--////////          ACCELERATION        /////////////////////////////////////////////////////////////////////-->
 
         <div id="background_2A3"class= "col-md-6">
           <div id="FC_2A3" class="col-md-8 col-md-offset-2">{{currentAcceleration}}</div>
         </div>
-      </div>
-      <!--////////          POD       /////////////////////////////////////////////////////////////////////-->
 
-      <div id="background_2B" class="col-md-5">
-        <div id="background_2B1" class= "col-md-12">
-          <div id="background_2B1_axis" class= "col-md-12">
-          <img id="img_control_pod" src="static?resource=images/podmodel.png"/>
+        <br />
+        <br />
+        <div class="col-md-12">
+          <div id="stateContainer"class= "col-md-10" style="height: 100px; margin-top: 20px;">
+            <div id="stateContent" class="">{{currentState}}</div>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+
+        <div id="distanceContainer" class="col-md-12">
+          <div id="background_3A" class= "col-md-6">
+            <!--///////          DISTANCE TRAVELED        /////////////////////////////////////////////////////////////////////-->
+            <div id="FC_3A" class="col-md-8 col-md-offset-2">{{currentPosition | number:1}}</div>
+          </div>
+          <div class= "col-md-6">
           </div>
         </div>
-        <!--////////          PITCH ROLL YAW       /////////////////////////////////////////////////////////////////////-->
-        <div id="background_2B2" class= "col-md-4">
-          <div id="FC_2B2" class="col-md-8 col-md-offset-2">{{currentRotation.r}}</div>
-        </div>
-        <div id="background_2B3" class= "col-md-4">
-          <div id="FC_2B3" class="col-md-8 col-md-offset-2">{{currentRotation.p}}</div>
-        </div>
-        <div id="background_2B4" class= "col-md-4">
-          <div id="FC_2B4" class="col-md-8 col-md-offset-2">{{currentRotation.y}}</div>
-        </div>
       </div>
+
       <!--////////          TEMPERATURE        /////////////////////////////////////////////////////////////////////-->
-
-      <div id="background_2C" class="col-md-2">
-        <div id="background_2C1" class= "col-md-12">
-          <img id="img_control_temp" class="col-md-5" src="static?resource=images/temperatureicon.png" />
-          <div id="img_control_F" class="col-md-7">
-            <div id="FC_2C1" class="col-md-10 col-md-offset-1">{{currentTemperature}}</div>
-          </div>
+      <div class="col-md-3" id="buttonContainer">
+        <div id="killPodButton" ng-click="killPod()"></div>
+        <div id="emergencyStopButton" ng-click="emergencyStop()"></div>
+        <div id="healthCheckStatus">
+          <label id="healthCheckLabel">{{healthy ? "HEALTHY" : "NOT HEALTHY"}}</label>
         </div>
+      </div>
+      <div id="background_2C" class="col-md-2">
         <div id="background_2C2" class= "col-md-12">
           <!--////////          PRIMARY BATTERY        /////////////////////////////////////////////////////////////////////-->
           <div id="background_2C2A" class= "col-md-12">
@@ -122,9 +109,9 @@
               </div>
             </div>
             <div class="grow_to_container col-md-7">
-              <div class="F col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.tmp | number:1}}</div></div>
-              <div class="V col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.vol}}</div></div>
-              <div class="A-H col-md-12"><div id="align" class="battery_input col-md-10">{{currentPrimaryBattery.amp | number:0}}</div></div>
+              <div class="F col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.tmp | number:2}}</div></div>
+              <div class="V col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.vol | number:2}}</div></div>
+              <div class="A-H col-md-12"><div class="battery_input col-md-10">{{currentPrimaryBattery.amp | number:2}}</div></div>
             </div>
           </div>
           <!--////////          AUX BATTERY       /////////////////////////////////////////////////////////////////////-->
@@ -135,9 +122,9 @@
                 </div>
               </div>
               <div class="grow_to_container col-md-7">
-                <div class="F col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.tmp | number:1}}</div></div>
-                <div class="V col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.vol}}</div></div>
-                <div class="A-H col-md-12"><div id="align2" class="battery_input col-md-10">{{currentAuxiliaryBattery.amp | number:0}}</div></div>
+                <div class="F col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.tmp | number:2}}</div></div>
+                <div class="V col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.vol | number:2}}</div></div>
+                <div class="A-H col-md-12"><div class="battery_input col-md-10">{{currentAuxiliaryBattery.amp | number:2}}</div></div>
               </div>
           </div>
         </div>
@@ -146,20 +133,14 @@
 
       <!--////////         ROW 3        /////////////////////////////////////////////////////////////////////-->
     <div id="background_3" class="col-md-12">
-      <div id="background_3A" class= "col-md-4">
+      <div id="background_3E" class= "col-md-4">
         <!--///////          DISTANCE TRAVELED        /////////////////////////////////////////////////////////////////////-->
-        <div id="FC_3A" class="col-md-8 col-md-offset-2">{{currentPosition | number:1}}</div>
       </div>
-      <div id="background_3B" class= "col-md-3">
+      <div id="background_3F" class= "col-md-3">
         <!--////////          DISTANCE LEFT        /////////////////////////////////////////////////////////////////////-->
-        <div id="FC_3B" class="col-md-8 col-md-offset-2">{{1609 - currentPosition | number:1}}</div>
       </div>
       <div id="background_3C" class= "col-md-2 col-md-offset-9"></div>
       <div id="background_3D" class= "col-md-1"></div>
     </div>
   </body>
 <html>
-
-
-
-

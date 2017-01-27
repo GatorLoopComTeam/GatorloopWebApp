@@ -149,11 +149,11 @@
     text-align: center;
     color:  white;
     position: relative;
-    right: 160%;
-    bottom: 20%;
+    bottom: 24%;
     //background-color: aqua;
     height: 100%;
     max-width: 100%;
+    right: 45px;
 
 }
 
@@ -172,7 +172,7 @@
     position: relative;
     top: 20%;
     color: inherit;
-    height: 18%;
+    height: 24%;
     max-width: 70%;
     //background-color: red;
     background-size: 100% 100%;
@@ -187,7 +187,7 @@
     position: relative;
     top: 30%;
     color: inherit;
-    height: 18%;
+    height: 24%;
     max-width: 70%;
 //background-color: red;
     background-size: 100% 100%;
@@ -203,7 +203,7 @@
     margin-top: 10%;
     top: 35%;
     color: inherit;
-    height: 20%;
+    height: 24%;
     width: 100%;
 //background-color: red;
     background-size: 100% 100%;
@@ -305,14 +305,116 @@ background-color: green;
     -moz-background-size: contain; /*  Firefox  */
 }
 
+#topSpacer{
+  background-size: 100%, 100%;
+  color: inherit;
+  margin-left: 1%;
+  margin-right: 1%;
+  height: 20%;
+  max-width: 33%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#killPodButton {
+  background: url(static?resource=images/newImages/killButton.png) no-repeat;
+  background-size: 100%, 100%;
+  color: inherit;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 20px;
+  height: 10%;
+  max-width: 60%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+  cursor: pointer;
+}
+
+#emergencyStopButton {
+  background: url(static?resource=images/newImages/stopButton.png) no-repeat;
+  background-size: 100%, 100%;
+  color: inherit;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 20px;
+  height: 10%;
+  max-width: 60%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+  cursor: pointer;
+}
+
+#healthCheckStatus {
+  background: url(static?resource=images/newImages/healthCheckIcon.png) no-repeat;
+  background-size: 100%, 100%;
+  color: inherit;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 20px;
+  height: 23%;
+  max-width: 80%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#stateContainer {
+  background: url(static?resource=images/newImages/stateIcon.png) no-repeat;
+  background-size: 100%, 100%;
+  color: inherit;
+  text-align: center;
+  margin-right: 1%;
+  margin-bottom: 20px;
+  height: 100%;
+  max-width: 100%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#buttonContainer {
+  background-size: 100%, 100%;
+  color: inherit;
+  height: 100%;
+  max-width: 100%;
+  -webkit-background-size: 100% 100%; /*  Safari  */
+  -khtml-background-size: 100% 100%; /*  Konqueror  */
+  -o-background-size: 100% 100%;
+  -moz-background-size: 100% 100%; /*  Firefox  */
+  text-align: center;
+}
+
 #background_2A2{
-    background: url(static?resource=images/velocitybutton.png) no-repeat;
+    background: url(static?resource=images/newImages/velocityIcon.png) no-repeat;
     background-size: 100%, 100%;
     color: inherit;
     margin-left: 1%;
     margin-right: 1%;
     height: 20%;
-    max-width: 33%;
+    max-width: 40%;
+    //background-color: yellow;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#stateContainer{
+    background: url(static?resource=images/newImages/stateIcon.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 20%;
+    max-width: 82%;
     //background-color: yellow;
     -webkit-background-size: 100% 100%; /*  Safari  */
     -khtml-background-size: 100% 100%; /*  Konqueror  */
@@ -321,13 +423,13 @@ background-color: green;
 }
 
 #background_2A3{
-    background: url(static?resource=images/accelerationclick.png) no-repeat;
+    background: url(static?resource=images/newImages/accelerationIcon.png) no-repeat;
     background-size: 100%, 100%;
     color: inherit;
     margin-left: 1%;
     margin-right: 1%;
     height: 20%;
-    max-width: 37%;
+    max-width: 40%;
     //background-color: yellow;
     -webkit-background-size: 100% 100%; /*  Safari  */
     -khtml-background-size: 100% 100%; /*  Konqueror  */
@@ -501,14 +603,18 @@ background-color: green;
     //background-color: red;
 }
 
+#distanceContainer{
+  width: 80%;
+  height: 100px;
+  margin-left: 10px;
+}
 #background_3A{
-    background: url(static?resource=images/distancetravelled.png) no-repeat;
+    background: url(static?resource=images/newImages/traveledIcon.png) no-repeat;
     background-size: 100%, 100%;
     color: inherit;
-    margin-left: 2.25%;
-    margin-right: 1%;
-    height: 85%;
-    max-width: 20%;
+    height: 100%;
+    max-width: 100%;
+    position: relative;
     //background-color: green;
     -webkit-background-size: 100% 100%; /*  Safari  */
     -khtml-background-size: 100% 100%; /*  Konqueror  */
@@ -517,11 +623,38 @@ background-color: green;
 }
 
 #background_3B{
-    background: url(static?resource=images/distanceleft.png) no-repeat;
+    background: url(static?resource=images/newImages/remainingIcon.png) no-repeat;
+    background-size: 100%, 100%;
+    color: inherit;
+    height: 100%;
+    max-width: 100%;
+    position:relative;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_3E{
+    background-size: 100%, 100%;
+    color: inherit;
+    margin-left: 2.25%;
+    margin-right: 1%;
+    height: 100%;
+    max-width: 15%;
+    //background-color: green;
+    -webkit-background-size: 100% 100%; /*  Safari  */
+    -khtml-background-size: 100% 100%; /*  Konqueror  */
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%; /*  Firefox  */
+}
+
+#background_3F{
     background-size: 100%, 100%;
     color: inherit;
     margin-right: 30%;
-    height: 85%;
+    height: 100%;
     max-width: 15%;
     //background-color: green;
     -webkit-background-size: 100% 100%; /*  Safari  */
@@ -576,6 +709,35 @@ background-color: green;
     max-width: 100%;
     //background-color: pink;
 
+}
+
+#healthCheckLabel{
+    font-family: Monsterrat-Regular;
+    font-size: 20px;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    //background-color: pink;
+
+}
+
+#stateContent{
+    font-family: Monsterrat-Regular;
+    font-size: 24px;
+    text-align: center;
+    color:  white;
+    position: relative;
+    top: 7%;
+
+    background-size: 100%, 100%;
+    height: 50%;
+    max-width: 100%;
 }
 
 #FC_2A3{
@@ -701,6 +863,3 @@ background-color: green;
     stroke: white;
     stroke-width: 1.5;
 }
-
-
-

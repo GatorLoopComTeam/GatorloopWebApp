@@ -2,7 +2,7 @@ package api
 
 import (
 	"database/sql"
-	"net/http"
+	"math"
 
 	log "github.com/Sirupsen/logrus"
 	restful "github.com/emicklei/go-restful"
@@ -16,7 +16,7 @@ type Velocity struct {
 
 // GetRecent : gets the most recent velocity
 func (v Velocity) GetRecent(request *restful.Request, response *restful.Response) {
-	row := database.DB.QueryRow("SELECT velocity FROM gatorloop.Velocity ORDER BY idVelocity DESC LIMIT 1")
+	row := database.DB.QueryRow("SELECT speed FROM gatorloop.wheel1speed ORDER BY idWheel1Speed DESC LIMIT 1")
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
@@ -24,15 +24,30 @@ func (v Velocity) GetRecent(request *restful.Request, response *restful.Response
 			log.Errorf("No Rows found. Returning 0.")
 		} else {
 			log.Errorf("Row scan failed. %v", err)
-			response.WriteError(http.StatusInternalServerError, err)
-			return
 		}
 	}
-	var ret Velocity
+	var wheel1Speed float64
 	if res.Valid {
-		ret = Velocity{res.Float64}
+		wheel1Speed = res.Float64
 	} else {
-		ret = Velocity{0}
+		wheel1Speed = 0.0
 	}
-	response.WriteEntity(ret)
+
+	row = database.DB.QueryRow("SELECT speed FROM gatorloop.wheel2speed ORDER BY idWheel2Speed DESC LIMIT 1")
+	err = row.Scan(&res)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Errorf("No Rows found. Returning 0.")
+		} else {
+			log.Errorf("Row scan failed. %v", err)
+		}
+	}
+	var wheel2Speed float64
+	if res.Valid {
+		wheel2Speed = res.Float64
+	} else {
+		wheel2Speed = 0.0
+	}
+
+	response.WriteEntity(Velocity{math.Max(wheel1Speed, wheel2Speed)})
 }

@@ -3,8 +3,11 @@ angular.module('gatorloopWebApp')
 .service('dashboardService', function($http) {
     var api = "/api/";
     return {
-        sendStopSignal: function() {
-            return $http.get(api + "stop");
+        killPod: function() {
+            return $http.get(api + "killpower");
+        },
+        emergencyStop: function() {
+          return $http.get(api + "stop");
         },
         get: function(url) {
             return $http.get(api + url);

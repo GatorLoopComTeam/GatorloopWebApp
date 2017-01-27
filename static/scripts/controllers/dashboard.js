@@ -52,137 +52,25 @@ angular.module('gatorloopWebApp')
         $scope.distanceLeft = 1609;
 
 
-//////////////   Here's where the graph code starts /////////////////////////
-
-        var limit = 60 * 1,
-                duration = 750,
-                now = new Date(Date.now() - duration);
-
-        var width = 600,
-                height = 325;
-
-        var groups = {
-                current: {
-                    color: 'orange',
-                    data: $scope.velocities
-                },
-                target: {
-                    color: 'aqua',
-                    data: $scope.accelerations
-                }
-            };
-
-        var x = d3.time.scale()
-                .domain([now - (limit - 2), now - duration])
-                .range([0, width])
-
-        var y = d3.scale.linear()
-                .domain([0, 250])
-                .range([height, 0])
-
-        var line = d3.svg.line()
-                .interpolate('basis')
-                .x(function(d, i) {
-                    return x(now - (limit - 1 - i) * duration)
-                })
-                .y(function(d) {
-                    return y(d)
-                })
-
-        var svg = d3.select('.graph').append('svg')
-                .attr('class', 'chart')
-                .attr('width', width)
-                .attr('height', height + 50)
-
-        var axis = svg.append('g')
-                .attr('class', 'x axis')
-                .attr('transform', 'translate(0,' + height + ')')
-                .call(x.axis = d3.svg.axis().scale(x).orient('bottom'))
-
-        svg.append("g")
-            .attr("class", "y axis")
-            //.attr('transform', 'translate(0,' + height + ')')
-            .call( y.axis = d3.svg.axis().scale(y).orient('right'))
-
-        var paths = svg.append('g');
-
-            for (var name in groups) {
-                var group = groups[name];
-                group.path = paths.append('path')
-                    .data([group.data])
-                    .attr('class', name + ' group')
-                    .style('stroke', group.color)
-            }
-
-        function tick() {
-                now = new Date();
-                for (var name in groups) {
-                    var group = groups[name];
-                    if($scope.isStreaming===false) group.data.push(0);
-                    group.path.attr('d', line);
-                    //console.log("velocity: " + (20 + Math.random() * 100));
-                    //console.log("acceleration: " + $scope.currentAcceleration);
-                    //console.log("group: " + group.data)
-                }
-
-                // Shift domain
-                x.domain([now - (limit - 2) * duration, now - duration]);
-
-                // Slide x-axis left
-                axis.transition()
-                    .duration(duration)
-                    .ease('linear')
-                    .call(x.axis);
-
-                // Slide paths left
-                paths.attr('transform', null)
-                    .transition()
-                    .duration(duration)
-                    .ease('linear')
-                    .attr('transform', 'translate(' + x(now - (limit - 1) * duration) + ')')
-                    .each('end', tick);
-
-                // Remove oldest data point from each group
-                for (var name in groups) {
-                    var group = groups[name];
-                    group.data.shift();
-                }
-        } tick();
-
-
-      ////////////////// Here's where it stops /////////////////////////////////////////////////
-
-      $scope.sendStopSignal = function() {
-          dashboardService.sendStopSignal().success(function(data) {
-              console.log(data.stop);
+      $scope.emergencyStop = function() {
+          dashboardService.emergencyStop().success(function(data) {
+              alert("POD STOPPED");
           }).error(function(data) {
-              console.error("Error", data);
+              alert("NOT STOPPED");
           });
+      }
+
+      $scope.killPod = function() {
+        dashboardService.killPod().success(function(data) {
+          alert("POD KILLED");
+        }).error(function(data) {
+          alert("NOT KILLED");
+        });
       }
 
       $scope.getCurrentVelocity = function() {
           dashboardService.get("velocity").success(function(data) {
               $scope.currentVelocity = data.velocity;
-              $scope.velocities.push(data.velocity);
-          }).error(function(data) {
-              console.error("Error", data);
-          });
-      }
-
-      $scope.getCurrentTemperature = function() {
-          dashboardService.get("temperature").success(function(data) {
-              $scope.currentTemperature = data.temperature;
-              $scope.temperatures.push(data.temperature);
-          }).error(function(data) {
-              console.error("Error", data);
-          });
-      }
-
-      $scope.getCurrentRotations = function() {
-          dashboardService.get("rotation").success(function(data) {
-              $scope.currentRotation = {r: data.roll, p: data.pitch, y: data.yaw};
-              $scope.rotations.push({r: data.roll, p: data.pitch, y: data.yaw});
-
           }).error(function(data) {
               console.error("Error", data);
           });
@@ -199,8 +87,7 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentPrimaryBattery = function() {
         dashboardService.get("primarybattery").success(function(data) {
-            $scope.currentPrimaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.temperature, amp: data.amp_hours };
-            $scope.primaryBatterys.push({vol: data.vol, soc: data.soc, tmp: data.tmp, amp: data.amp_hours });
+            $scope.currentPrimaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.pack1_temp, amp: data.amp_hours };
         }).error(function(data) {
             console.error("Error", data);
         });
@@ -208,31 +95,54 @@ angular.module('gatorloopWebApp')
 
       $scope.getCurrentAuxiliaryBattery = function() {
         dashboardService.get("auxbattery").success(function(data) {
-            $scope.currentAuxiliaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.temperature, amp: data.amp_hours };
-            $scope.auxiliaryBatterys.push({vol: data.vol, soc: data.soc, tmp: data.tmp, amp: data.amp_hours });
+            $scope.currentAuxiliaryBattery = {vol: data.voltage, soc: data.soc, tmp: data.pack1_temp, amp: data.amp_hours };
         }).error(function(data) {
             console.error("Error", data);
         });
       }
 
+      $scope.getCurrentState = function() {
+        dashboardService.get("state").success(function(data) {
+          $scope.currentState = data.state;
+        }).error(function(data) {
+          console.error("Error: ", data);
+        });
+      };
+
+      $scope.getPodHealthy = function() {
+        $scope.healthy = $scope.currentPrimaryBattery.tmp < 70 &&
+        $scope.currentPrimaryBattery.tmp > -20 &&
+        $scope.currentAuxiliaryBattery.tmp < 70 &&
+        $scope.currentAuxiliaryBattery.tmp > -20 &&
+        $scope.currentPrimaryBattery.vol > 32 &&
+        $scope.currentPrimaryBattery.vol < 40.8 &&
+        $scope.currentAuxiliaryBattery.vol > 32 &&
+        $scope.currentAuxiliaryBattery.vol < 40.8 &&
+        $scope.currentPrimaryBattery.soc > 60 &&
+        $scope.currentPrimaryBattery.soc < 100 &&
+        $scope.currentAuxiliaryBattery.soc > 60 &&
+        $scope.currentAuxiliaryBattery.soc < 100 &&
+        $scope.currentPrimaryBattery.amp > 8 &&
+        $scope.currentPrimaryBattery.amp < 40 &&
+        $scope.currentAuxiliaryBattery.amp > 8 &&
+        $scope.currentAuxiliaryBattery.amp < 40;
+      }
+
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
-                $scope.isStreaming = true;
                 $scope.getCurrentVelocity();
                 $scope.getCurrentAcceleration();
-                $scope.getCurrentRotations();
-                $scope.getCurrentTemperature();
                 $scope.getCurrentPosition();
                 $scope.getCurrentPrimaryBattery();
                 $scope.getCurrentAuxiliaryBattery();
                 $scope.setSecondaryBatteryLevel()
                 $scope.setPrimaryBatteryLevel();
                 $scope.setSecondaryBatteryLevel();
-                $scope.setPodPosition();
-                $scope.setDistanceLeft();
-                //tick();//$scope.graph();
+                $scope.getPodHealthy();
+                $scope.getCurrentState();
               }, 750);
       }
+      $scope.startGettingData();
 
       $scope.stopGettingData = function() {
           $scope.isStreaming = false;
@@ -240,23 +150,15 @@ angular.module('gatorloopWebApp')
       }
 
       $scope.setPrimaryBatteryLevel = function() {
-        dashboardService.get("primarybattery").success(function(data){ $scope.percentage = 100*(data.soc); });
-          document.getElementById("primaryBatteryLevel").style.top = $scope.percentage + "%";
-          document.getElementById("primaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
-          console.log($scope.percentage);
+        console.log("soc = " + $scope.currentPrimaryBattery.soc);
+          document.getElementById("primaryBatteryLevel").style.height = $scope.currentPrimaryBattery.soc + "%";
+          document.getElementById("primaryBatteryLevel").style.top = 100 - $scope.currentPrimaryBattery.soc + "%";
       }
 
       $scope.setSecondaryBatteryLevel = function() {
-          dashboardService.get("auxbattery").success(function(data){ $scope.percentage = 100*(data.soc); });
-          document.getElementById("secondaryBatteryLevel").style.top = $scope.percentage + "%";
-          document.getElementById("secondaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
-      }
-
-      $scope.setSecondaryBatteryLevel = function() {
-          dashboardService.get("auxbattery").success(function(data){ $scope.percentage = (data.soc); });
-          document.getElementById("secondaryBatteryLevel").style.top = $scope.percentage + "%";
-          document.getElementById("secondaryBatteryLevel").style.height = 100 - $scope.percentage + "%";
-          console.log($scope.percentage);
+        console.log("soc = " + $scope.currentAuxiliaryBattery.soc);
+          document.getElementById("secondaryBatteryLevel").style.height = $scope.currentAuxiliaryBattery.soc + "%";
+          document.getElementById("secondaryBatteryLevel").style.top = 100 - $scope.currentAuxiliaryBattery.soc + "%";
       }
 
       $scope.getCurrentPosition = function() {
@@ -270,9 +172,5 @@ angular.module('gatorloopWebApp')
             });
         }
 
-      $scope.setPodPosition = function() {
-          if($scope.currentPosition >= 1609) $scope.currentPosition = 1609;
-          document.getElementById("pod_move_control").style.marginLeft = 9 + 336*($scope.currentPosition / 1609) + "%";
-      }
 
     });
