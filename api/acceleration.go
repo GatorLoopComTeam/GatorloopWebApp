@@ -20,9 +20,7 @@ func (a Acceleration) GetRecent(request *restful.Request, response *restful.Resp
 	var y sql.NullFloat64
 	err := row.Scan(&y)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning 0.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 			response.WriteError(http.StatusInternalServerError, err)
 			return

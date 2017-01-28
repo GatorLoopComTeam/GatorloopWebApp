@@ -20,9 +20,7 @@ func (s State) GetRecent(request *restful.Request, response *restful.Response) {
 	var resState sql.NullString
 	err := row.Scan(&resState)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning empty string.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 			response.WriteError(http.StatusInternalServerError, err)
 			return

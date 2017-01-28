@@ -39,9 +39,7 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 	var resVoltage sql.NullFloat64
 	err := row.Scan(&resVoltage)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}
@@ -51,9 +49,7 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 	var id sql.NullInt64
 	err = pack1Row.Scan(&id, &resPack1)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Error("No Rows found.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}
@@ -62,9 +58,7 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 	var resPack2 sql.NullFloat64
 	err = pack2Row.Scan(&id, &resPack2)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Error("No Rows found.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}
@@ -73,9 +67,7 @@ func (a AuxiliaryBattery) GetRecent(request *restful.Request, response *restful.
 	var resPack3 sql.NullFloat64
 	err = pack3Row.Scan(&id, &resPack3)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Error("No Rows found.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}

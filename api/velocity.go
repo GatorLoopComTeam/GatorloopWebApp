@@ -20,9 +20,7 @@ func (v Velocity) GetRecent(request *restful.Request, response *restful.Response
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning 0.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}
@@ -36,9 +34,7 @@ func (v Velocity) GetRecent(request *restful.Request, response *restful.Response
 	row = database.DB.QueryRow("SELECT speed FROM gatorloop.wheel2speed ORDER BY idWheel2Speed DESC LIMIT 1")
 	err = row.Scan(&res)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning 0.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 		}
 	}

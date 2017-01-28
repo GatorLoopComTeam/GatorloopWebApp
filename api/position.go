@@ -21,9 +21,7 @@ func (p Position) GetRecent(request *restful.Request, response *restful.Response
 	var res sql.NullFloat64
 	err := row.Scan(&res)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning 0.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 			response.WriteError(http.StatusInternalServerError, err)
 			return

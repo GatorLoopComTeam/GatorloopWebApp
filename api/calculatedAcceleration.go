@@ -20,9 +20,7 @@ func (c CalculatedAcceleration) GetRecent(request *restful.Request, response *re
 	var acc sql.NullFloat64
 	err := row.Scan(&acc)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			log.Errorf("No Rows found. Returning 0.")
-		} else {
+		if err != sql.ErrNoRows {
 			log.Errorf("Row scan failed. %v", err)
 			response.WriteError(http.StatusInternalServerError, err)
 			return
