@@ -125,6 +125,7 @@ angular.module('gatorloopWebApp')
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
                 $scope.getPrimaryBattery();
+                $scope.getAuxiliaryBattery();
                 $scope.getCurrentState();
                 $scope.getCurrentVelocity();
                 $scope.getCurrentCalcAcceleration();
