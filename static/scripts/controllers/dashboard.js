@@ -95,7 +95,7 @@ angular.module('gatorloopWebApp')
                 $scope.setSecondaryBatteryLevel();
                 $scope.getPodHealthy();
                 $scope.getCurrentState();
-              }, 750);
+              }, 200);
       }
       $scope.startGettingData();
 
