@@ -93,8 +93,8 @@ angular.module('gatorloopWebApp')
           });
       }
 
-      $scope.getCurrentAcceleration = function() {
-          dashboardService.get("acceleration").success(function(data) {
+      $scope.getCurrentCalcAcceleration = function() {
+          dashboardService.get("calcAcceleration").success(function(data) {
               $scope.currentAcceleration = data.acceleration;
           }).error(function(data) {
               console.error("Error", data);
@@ -107,9 +107,8 @@ angular.module('gatorloopWebApp')
                 $scope.getAuxiliaryBattery();
                 $scope.getCurrentState();
                 $scope.getCurrentVelocity();
-                $scope.getCurrentAcceleration();
-                // $scope.getBrakeStatus();
-              }, 750);
+                $scope.getCurrentCalcAcceleration();
+              }, 200);
       }
 
       $scope.startGettingData();
