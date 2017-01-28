@@ -47,6 +47,11 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 		To(a.GetRecent).
 		Doc("Get the most recent acceleration."))
 
+	var c api.CalculatedAcceleration
+	ws.Route(ws.GET("/calcAcceleration").
+		To(c.GetRecent).
+		Doc("Get the most recent calc acceleration."))
+
 	var p api.Position
 	ws.Route(ws.GET("/position").
 		To(p.GetRecent).
@@ -56,6 +61,11 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 	ws.Route(ws.GET("/temperature").
 		To(t.GetRecent).
 		Doc("Get the most recent temperature."))
+
+	var pt api.ProcTemp
+	ws.Route(ws.GET("/procTemp").
+		To(pt.GetRecent).
+		Doc("Get the most recent processor temperature."))
 
 	var pBat api.PrimaryBattery
 	ws.Route(ws.GET("/primarybattery").

@@ -10,6 +10,7 @@ angular.module('gatorloopWebApp')
       $scope.batteryAHUpperBound = 40;
       $scope.batterySOCLowerBound = 60;
       $scope.batterySOCUpperBound = 100;
+      $scope.currentProcTemp = 0;
 
       $scope.currentState = "";
       $scope.primaryBrakesEngaged = false;
@@ -101,12 +102,21 @@ angular.module('gatorloopWebApp')
           });
       }
 
+      $scope.getCurrentProcTemp = function() {
+          dashboardService.get("procTemp").success(function(data) {
+              $scope.currentProcTemp = data.temperature;
+          }).error(function(data) {
+              console.error("Error", data);
+          });
+      }
+
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
                 $scope.getPrimaryBattery();
                 $scope.getCurrentState();
                 $scope.getCurrentVelocity();
                 $scope.getCurrentCalcAcceleration();
+                $scope.getCurrentProcTemp();
               }, 200);
       }
 
