@@ -87,6 +87,11 @@ func RegisterAPI(apiPath string, container *restful.Container) {
 		To(k.SendKillPower).
 		Doc("Throws the circuit breaker on the pod to kill power."))
 
+	var ready api.Ready
+	ws.Route(ws.GET("/ready").
+		To(ready.SendReady).
+		Doc("Send ready signal to controller."))
+
 	var state api.State
 	ws.Route(ws.GET("/state").
 		To(state.GetRecent).

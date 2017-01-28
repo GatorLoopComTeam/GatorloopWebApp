@@ -110,6 +110,18 @@ angular.module('gatorloopWebApp')
           });
       }
 
+      $scope.sendReady = function() {
+        dashboardService.get("ready").success(function(data) {
+          if data.ready === true {
+            console.log("ready recieved");
+          } else {
+            console.error("ready failed");
+          }
+        }).error(function(data) {
+            console.error("Error", data);
+        });
+      }
+
       $scope.startGettingData = function(){
         $scope.interval = setInterval(function() {
                 $scope.getPrimaryBattery();
