@@ -112,7 +112,7 @@ angular.module('gatorloopWebApp')
 
       $scope.sendReady = function() {
         dashboardService.get("ready").success(function(data) {
-          if data.ready === true {
+          if (data.ready === true) {
             console.log("ready recieved");
           } else {
             console.error("ready failed");
